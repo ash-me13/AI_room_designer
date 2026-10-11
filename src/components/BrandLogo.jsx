@@ -10,9 +10,9 @@ export default function BrandLogo({ size = 36, showText = true }) {
         viewBox="0 0 36 36"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        style={{ flexShrink: 0, borderRadius: 8 }}
+        style={{ flexShrink: 0, borderRadius: 4 }}
       >
-        <rect width="36" height="36" rx="8" fill="#181B19" />
+        <rect width="36" height="36" rx="4" fill="#181B19" />
         
         {/* Subtle coordinate ticks */}
         <line x1="4" y1="4" x2="7" y2="4" stroke="#717E76" strokeWidth="1" strokeLinecap="round" />

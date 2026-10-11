@@ -16,8 +16,7 @@ export default function Navbar({ onOpenExport }) {
         position: "sticky",
         top: 0,
         zIndex: 100,
-        backgroundColor: "rgba(250, 248, 245, 0.92)",
-        backdropFilter: "blur(12px)",
+        backgroundColor: "var(--color-ivory-50)",
         borderBottom: "1px solid var(--color-ivory-300)"
       }}
     >

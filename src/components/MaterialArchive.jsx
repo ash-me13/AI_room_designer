@@ -128,10 +128,10 @@ export default function MaterialArchive() {
           <div
             style={{
               backgroundColor: "#FFF",
-              borderRadius: "var(--radius-md)",
+              borderRadius: "var(--radius-sm)",
               border: "1px solid var(--color-ivory-300)",
               overflow: "hidden",
-              boxShadow: "var(--shadow-editorial)"
+              boxShadow: "var(--shadow-subtle)"
             }}
           >
             {/* High-res macro view */}
@@ -146,16 +146,16 @@ export default function MaterialArchive() {
                   position: "absolute",
                   top: 14,
                   right: 14,
-                  background: "rgba(24, 27, 25, 0.8)",
-                  backdropFilter: "blur(4px)",
+                  background: "#181B19",
                   color: "#FAF8F5",
                   fontFamily: "var(--font-mono)",
                   fontSize: 10,
                   padding: "4px 8px",
-                  borderRadius: 3
+                  borderRadius: 2,
+                  border: "1px solid var(--color-ink-600)"
                 }}
               >
-                MACRO WEAVE INSPECTION
+                MACRO WEAVE SPECIMEN
               </div>
             </div>
 

@@ -16,7 +16,6 @@ export default function ExportSpecModal({ isOpen, onClose }) {
         inset: 0,
         zIndex: 500,
         backgroundColor: "rgba(24, 27, 25, 0.75)",
-        backdropFilter: "blur(6px)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -32,7 +31,7 @@ export default function ExportSpecModal({ isOpen, onClose }) {
           maxWidth: "760px",
           maxHeight: "90vh",
           overflowY: "auto",
-          borderRadius: "var(--radius-md)",
+          borderRadius: "var(--radius-sm)",
           border: "1px solid var(--color-ivory-300)",
           boxShadow: "var(--shadow-lifted)",
           padding: "36px"

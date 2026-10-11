@@ -1,10 +1,9 @@
 import React, { useState, useMemo } from "react";
 import { CHECKLIST_ITEMS } from "../data/roomData";
-import { Check, ShieldCheck, Clock, Sparkles, AlertCircle } from "lucide-react";
-import confetti from "canvas-confetti";
+import { Check, ShieldCheck, Clock, FileText, AlertCircle } from "lucide-react";
 
-export default function BudgetPlanner() {
-  // Budget ceiling slider: default ₹2,000
+export default function BudgetPlanner({ onExportBrief }) {
+  // Budget ceiling slider: default ₹2,500
   const [budgetLimit, setBudgetLimit] = useState(2500);
   
   // Selected items initialized with all free items + first 2 purchases
@@ -33,15 +32,6 @@ export default function BudgetPlanner() {
   const remaining = budgetLimit - totalCost;
   const isOverBudget = remaining < 0;
 
-  const triggerCelebrate = () => {
-    confetti({
-      particleCount: 50,
-      spread: 60,
-      origin: { y: 0.7 },
-      colors: ["#C8664B", "#6B7F6D", "#DDD2BF", "#181B19"]
-    });
-  };
-
   const filteredItems = useMemo(() => {
     if (activeCategory === "all") return CHECKLIST_ITEMS;
     return CHECKLIST_ITEMS.filter((item) => item.category === activeCategory);
@@ -57,14 +47,14 @@ export default function BudgetPlanner() {
       }}
     >
       <div style={{ maxWidth: "var(--container-max)", margin: "0 auto" }}>
-        {/* Section Header */}
+        {/* Section Header: Architectural Ledger Format */}
         <div style={{ marginBottom: 36 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
             <span className="badge-arch badge-terracotta">
-              TRANSPARENT ESTIMATOR
+              COST SCHEDULE // BILL OF QUANTITIES
             </span>
             <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--color-ink-500)" }}>
-              • ZERO HIDDEN COSTS
+              • LOCAL MARKET VALUATION
             </span>
           </div>
 
@@ -86,22 +76,22 @@ export default function BudgetPlanner() {
                   color: "var(--color-ink-900)"
                 }}
               >
-                Here's what you can change without spending more than ₹{budgetLimit.toLocaleString()}
+                Cost-calibrated plan for ₹{budgetLimit.toLocaleString()} ceiling
               </h2>
               <p style={{ fontSize: 15, color: "var(--color-ink-600)", marginTop: 6, maxWidth: 640 }}>
-                A good room is built through thoughtful habits, light angles, and tactile layers. Adjust your maximum budget ceiling below to see what fits comfortably.
+                Every intervention is indexed by installation effort, lease safety, and local street pricing. Slide your budget cap to configure which interventions to execute first.
               </p>
             </div>
 
-            {/* Confetti button */}
-            {!isOverBudget && (
+            {/* Export brief button - Functional, Zero AI Gimmicks */}
+            {onExportBrief && (
               <button
-                onClick={triggerCelebrate}
+                onClick={onExportBrief}
                 className="btn btn-secondary hide-mobile"
                 style={{ fontSize: 13, gap: 6 }}
               >
-                <Sparkles size={14} color="var(--color-terracotta)" />
-                <span>Celebrate Clean Budget</span>
+                <FileText size={14} />
+                <span>Export Cost Schedule</span>
               </button>
             )}
           </div>
@@ -117,16 +107,16 @@ export default function BudgetPlanner() {
           }}
           className="budget-planner-grid"
         >
-          {/* Left Column: Reassuring Budget Gauge Card */}
+          {/* Left Column: Architectural Ledger Summary Plate */}
           <div
             style={{
               backgroundColor: "#FFF",
               padding: "24px",
-              borderRadius: "var(--radius-md)",
+              borderRadius: "var(--radius-sm)",
               border: "1px solid var(--color-ivory-300)",
-              boxShadow: "var(--shadow-editorial)",
+              boxShadow: "var(--shadow-subtle)",
               position: "sticky",
-              top: "90px"
+              top: "84px"
             }}
           >
             <span
@@ -140,7 +130,7 @@ export default function BudgetPlanner() {
                 marginBottom: 12
               }}
             >
-              YOUR TARGET BUDGET CEILING
+              EXPENDITURE CEILING
             </span>
 
             {/* Big readable budget number */}

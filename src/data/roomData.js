@@ -1,5 +1,5 @@
 /* ==========================================================================
-   RoomRevive AI — Studio Data & Architectural Presets
+   RoomRevive Studio — Data & Architectural Presets
    Carefully curated for Indian & Global renters, students, and PG dwellers
    ========================================================================== */
 

@@ -74,17 +74,17 @@ export default function Hero() {
               marginBottom: 32
             }}
           >
-            RoomRevive AI is an interior design studio engineered specifically for small rental flats, student hostels, and cramped PG bedrooms. We design around lease restrictions, landlord rules, and real student budgets from ₹0 to ₹5,000.
+            RoomRevive is an interior architecture and spatial design studio engineered specifically for small rental flats, student hostels, and cramped PG bedrooms. We design around lease restrictions, landlord rules, and real student budgets from ₹0 to ₹5,000.
           </p>
 
           {/* Action CTAs */}
-          <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 14, marginBottom: 40 }}>
+          <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 14, marginBottom: 36 }}>
             <button
               onClick={() => scrollTo("studio-section")}
               className="btn btn-primary"
               style={{ padding: "13px 26px", fontSize: 15 }}
             >
-              <span>Let's revive your room</span>
+              <span>Explore Spatial Studio</span>
               <ArrowDown size={15} />
             </button>
 
@@ -93,66 +93,91 @@ export default function Hero() {
               className="btn btn-secondary"
               style={{ padding: "13px 22px", fontSize: 14 }}
             >
-              <span>Explore ₹0 Free Fixes</span>
+              <span>View ₹0 Free Interventions</span>
             </button>
           </div>
 
-          {/* Studio Guarantee Markers */}
+          {/* Integrated Architectural Protocol Strip (Replaces repeating 3-card layout) */}
           <div
             style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
-              gap: 16,
-              paddingTop: 24,
-              borderTop: "1px dashed var(--color-ivory-300)"
+              backgroundColor: "var(--color-ivory-100)",
+              border: "1px solid var(--color-ivory-300)",
+              borderRadius: "var(--radius-sm)",
+              padding: "16px 20px"
             }}
           >
-            <div>
-              <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}>
-                <ShieldCheck size={14} color="var(--color-sage-dark)" />
-                <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 700, color: "var(--color-ink-900)" }}>
-                  ZERO WALL DAMAGE
-                </span>
-              </div>
-              <p style={{ fontSize: 12, color: "var(--color-ink-600)", lineHeight: 1.4 }}>
-                Tension rods, Command mounts, &amp; clean-peel tape only.
-              </p>
+            <div
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 10,
+                textTransform: "uppercase",
+                letterSpacing: "0.06em",
+                color: "var(--color-ink-500)",
+                marginBottom: 10,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between"
+              }}
+            >
+              <span>CORE ARCHITECTURAL PROTOCOLS</span>
+              <span>VERIFIED LEASE-SAFE</span>
             </div>
 
-            <div>
-              <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}>
-                <Ruler size={14} color="var(--color-terracotta)" />
-                <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 700, color: "var(--color-ink-900)" }}>
-                  SMALL FOOTPRINT LAB
-                </span>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr 1fr",
+                gap: 16
+              }}
+              className="hero-protocol-grid"
+            >
+              <div style={{ borderRight: "1px solid var(--color-ivory-300)", paddingRight: 12 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 2 }}>
+                  <ShieldCheck size={13} color="var(--color-sage-dark)" />
+                  <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 700, color: "var(--color-ink-900)" }}>
+                    ZERO WALL DAMAGE
+                  </span>
+                </div>
+                <p style={{ fontSize: 11, color: "var(--color-ink-600)", lineHeight: 1.4 }}>
+                  Tension rods &amp; Command mounts only.
+                </p>
               </div>
-              <p style={{ fontSize: 12, color: "var(--color-ink-600)", lineHeight: 1.4 }}>
-                Optimized for tight 80 to 180 sq.ft rooms and single bunks.
-              </p>
-            </div>
 
-            <div>
-              <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}>
-                <Compass size={14} color="var(--color-ink-800)" />
-                <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 700, color: "var(--color-ink-900)" }}>
-                  HONEST BUDGETS
-                </span>
+              <div style={{ borderRight: "1px solid var(--color-ivory-300)", paddingRight: 12 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 2 }}>
+                  <Ruler size={13} color="var(--color-terracotta)" />
+                  <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 700, color: "var(--color-ink-900)" }}>
+                    COMPACT FOOTPRINT
+                  </span>
+                </div>
+                <p style={{ fontSize: 11, color: "var(--color-ink-600)", lineHeight: 1.4 }}>
+                  Engineered for 80–180 sq.ft rooms.
+                </p>
               </div>
-              <p style={{ fontSize: 12, color: "var(--color-ink-600)", lineHeight: 1.4 }}>
-                Prioritized checklists with transparent local market pricing.
-              </p>
+
+              <div>
+                <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 2 }}>
+                  <Compass size={13} color="var(--color-ink-800)" />
+                  <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 700, color: "var(--color-ink-900)" }}>
+                    TRANSPARENT COSTS
+                  </span>
+                </div>
+                <p style={{ fontSize: 11, color: "var(--color-ink-600)", lineHeight: 1.4 }}>
+                  Real street market verified prices.
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Right Column: Architectural Hero Plate */}
-        <div style={{ position: "relative" }}>
+        <div>
           {/* Framed Editorial Visual Card */}
           <div
             style={{
               backgroundColor: "#FFF",
               padding: "16px",
-              borderRadius: "var(--radius-md)",
+              borderRadius: "var(--radius-sm)",
               border: "1px solid var(--color-ivory-300)",
               boxShadow: "var(--shadow-editorial)",
               position: "relative"
@@ -172,12 +197,12 @@ export default function Hero() {
                 color: "var(--color-ink-600)"
               }}
             >
-              <span>CASE STUDY № 82 • HOSTEL ROOM</span>
-              <span className="badge-arch badge-sage">AFTER REVIVAL</span>
+              <span>CASE STUDY № 82 • HOSTEL BEDROOM</span>
+              <span className="badge-arch badge-sage">POST-INTERVENTION</span>
             </div>
 
-            {/* Visual Image with architectural overlay */}
-            <div style={{ position: "relative", overflow: "hidden", borderRadius: "var(--radius-sm)" }}>
+            {/* Visual Image with architectural overlay (Solid tags, NO glassmorphism blur) */}
+            <div style={{ position: "relative", overflow: "hidden", borderRadius: "var(--radius-xs)" }}>
               <img
                 src="/images/student_room_japandi_after_1791721184670.jpg"
                 alt="Transformed Japandi Student Hostel Room"
@@ -189,21 +214,20 @@ export default function Hero() {
                 }}
               />
 
-              {/* Architectural measurement tags */}
+              {/* Architectural measurement tags - Solid, Crisp, Technical */}
               <div
                 style={{
                   position: "absolute",
                   top: 14,
                   left: 14,
-                  background: "rgba(24, 27, 25, 0.78)",
-                  backdropFilter: "blur(6px)",
+                  background: "#181B19",
                   color: "#FAF8F5",
                   fontFamily: "var(--font-mono)",
                   fontSize: 10,
                   padding: "4px 8px",
-                  borderRadius: 3,
+                  borderRadius: 2,
                   letterSpacing: "0.05em",
-                  border: "1px solid rgba(255,255,255,0.15)"
+                  border: "1px solid var(--color-ink-600)"
                 }}
               >
                 LIGHTING: 2700K DIFFUSE
@@ -214,21 +238,20 @@ export default function Hero() {
                   position: "absolute",
                   bottom: 14,
                   right: 14,
-                  background: "rgba(24, 27, 25, 0.78)",
-                  backdropFilter: "blur(6px)",
+                  background: "#181B19",
                   color: "#FAF8F5",
                   fontFamily: "var(--font-mono)",
                   fontSize: 10,
                   padding: "4px 8px",
-                  borderRadius: 3,
+                  borderRadius: 2,
                   letterSpacing: "0.05em",
-                  border: "1px solid rgba(255,255,255,0.15)"
+                  border: "1px solid var(--color-ink-600)"
                 }}
               >
                 FLOOR: 100% BRAIDED JUTE
               </div>
 
-              {/* Pin point sample */}
+              {/* Pin point sample - Clean architectural coordinate pin, no glowing halo */}
               <div
                 style={{
                   position: "absolute",
@@ -243,17 +266,19 @@ export default function Hero() {
               >
                 <div
                   style={{
-                    width: 24,
-                    height: 24,
+                    width: 22,
+                    height: 22,
                     borderRadius: "50%",
                     background: "var(--color-terracotta)",
                     color: "#fff",
                     fontFamily: "var(--font-mono)",
-                    fontSize: 11,
+                    fontSize: 10,
+                    fontWeight: 700,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    boxShadow: "0 0 0 4px rgba(200, 102, 75, 0.3)"
+                    border: "2px solid #FFFFFF",
+                    boxShadow: "0 2px 6px rgba(0,0,0,0.3)"
                   }}
                 >
                   01
@@ -265,7 +290,7 @@ export default function Hero() {
                     fontFamily: "var(--font-mono)",
                     fontSize: 10,
                     padding: "3px 8px",
-                    borderRadius: 3,
+                    borderRadius: 2,
                     border: "1px solid var(--color-ivory-300)",
                     whiteSpace: "nowrap"
                   }}
@@ -275,7 +300,7 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Editorial Caption beneath image */}
+            {/* Architectural Field Record beneath image */}
             <div
               style={{
                 marginTop: 14,
@@ -289,13 +314,12 @@ export default function Hero() {
                 <p
                   style={{
                     fontFamily: "var(--font-editorial)",
-                    fontSize: 14,
-                    fontStyle: "italic",
+                    fontSize: 13,
                     color: "var(--color-ink-800)",
                     marginBottom: 2
                   }}
                 >
-                  "A ₹1,200 lighting &amp; floor shift completely erased the hospital feel."
+                  Field Observation: Fluorescent glare decommissioned; layered rice-paper diffusion &amp; floor jute.
                 </p>
                 <span
                   style={{
@@ -305,7 +329,7 @@ export default function Hero() {
                     textTransform: "uppercase"
                   }}
                 >
-                  Floor area: 9.0 m² • Total spend: ₹1,850
+                  Floor scope: 9.0 m² • Documented budget: ₹1,850
                 </span>
               </div>
 
@@ -316,7 +340,7 @@ export default function Hero() {
                   style={{
                     width: 22,
                     height: 22,
-                    borderRadius: 3,
+                    borderRadius: 2,
                     border: "1px solid var(--color-ivory-300)",
                     background: "url(/images/swatch_linen_weave_1791721461966.jpg) center/cover"
                   }}
@@ -326,7 +350,7 @@ export default function Hero() {
                   style={{
                     width: 22,
                     height: 22,
-                    borderRadius: 3,
+                    borderRadius: 2,
                     border: "1px solid var(--color-ivory-300)",
                     background: "url(/images/swatch_jute_weave_1791721542569.jpg) center/cover"
                   }}
@@ -336,7 +360,7 @@ export default function Hero() {
                   style={{
                     width: 22,
                     height: 22,
-                    borderRadius: 3,
+                    borderRadius: 2,
                     border: "1px solid var(--color-ivory-300)",
                     background: "url(/images/swatch_terracotta_tile_1791721489065.jpg) center/cover"
                   }}
@@ -344,21 +368,6 @@ export default function Hero() {
               </div>
             </div>
           </div>
-
-          {/* Underlay shadow plate */}
-          <div
-            style={{
-              position: "absolute",
-              top: 14,
-              right: -10,
-              bottom: -10,
-              left: 10,
-              border: "1px dashed var(--color-ivory-300)",
-              borderRadius: "var(--radius-md)",
-              zIndex: -1,
-              pointerEvents: "none"
-            }}
-          />
         </div>
       </div>
     </section>

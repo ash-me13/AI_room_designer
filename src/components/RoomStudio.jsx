@@ -188,10 +188,10 @@ export default function RoomStudio() {
               <div
                 style={{
                   backgroundColor: "#FFF",
-                  borderRadius: "var(--radius-md)",
+                  borderRadius: "var(--radius-sm)",
                   border: "1px solid var(--color-ivory-300)",
                   overflow: "hidden",
-                  boxShadow: "var(--shadow-editorial)"
+                  boxShadow: "var(--shadow-subtle)"
                 }}
               >
                 <div
@@ -377,10 +377,10 @@ export default function RoomStudio() {
             <div
               style={{
                 backgroundColor: "#FFF",
-                borderRadius: "var(--radius-md)",
+                borderRadius: "var(--radius-sm)",
                 border: "1px solid var(--color-ivory-300)",
                 padding: "22px",
-                boxShadow: "var(--shadow-editorial)"
+                boxShadow: "var(--shadow-subtle)"
               }}
             >
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
@@ -470,7 +470,7 @@ export default function RoomStudio() {
             <div
               style={{
                 backgroundColor: "#FFF",
-                borderRadius: "var(--radius-md)",
+                borderRadius: "var(--radius-sm)",
                 border: "1px solid var(--color-ivory-300)",
                 padding: "22px",
                 boxShadow: "var(--shadow-subtle)"

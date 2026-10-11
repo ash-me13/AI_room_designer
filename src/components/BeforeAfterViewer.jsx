@@ -214,48 +214,46 @@ export default function BeforeAfterViewer({
               }}
             />
 
-            {/* Before Badge Tag */}
+            {/* Before Technical Stamp (Solid, Crisp, No Glassmorphic Blur) */}
             <div
               style={{
                 position: "absolute",
-                top: 18,
-                left: 18,
-                background: "rgba(24, 27, 25, 0.85)",
-                backdropFilter: "blur(4px)",
+                top: 16,
+                left: 16,
+                background: "#181B19",
                 color: "#FAF8F5",
                 fontFamily: "var(--font-mono)",
-                fontSize: 11,
-                padding: "5px 10px",
-                borderRadius: 3,
+                fontSize: 10,
+                padding: "4px 9px",
+                borderRadius: 2,
                 letterSpacing: "0.06em",
-                border: "1px solid rgba(255, 255, 255, 0.2)"
+                border: "1px solid var(--color-ink-600)"
               }}
             >
-              BEFORE: ORIGINAL ROOM
+              PRE-EXISTING STATE
             </div>
           </div>
 
-          {/* After Badge Tag */}
+          {/* After Technical Stamp (Solid, Crisp, No Glassmorphic Blur) */}
           <div
             style={{
               position: "absolute",
-              top: 18,
-              right: 18,
-              background: "rgba(200, 102, 75, 0.9)",
-              backdropFilter: "blur(4px)",
+              top: 16,
+              right: 16,
+              background: "var(--color-terracotta-dark)",
               color: "#FAF8F5",
               fontFamily: "var(--font-mono)",
-              fontSize: 11,
-              padding: "5px 10px",
-              borderRadius: 3,
+              fontSize: 10,
+              padding: "4px 9px",
+              borderRadius: 2,
               letterSpacing: "0.06em",
-              border: "1px solid rgba(255, 255, 255, 0.2)"
+              border: "1px solid rgba(255, 255, 255, 0.25)"
             }}
           >
-            AFTER: REVIVED
+            INTERVENTION PLAN
           </div>
 
-          {/* Interactive Slider Divider Handle */}
+          {/* Precision Architectural Vernier Slider Divider */}
           <div
             style={{
               position: "absolute",
@@ -263,33 +261,34 @@ export default function BeforeAfterViewer({
               bottom: 0,
               left: `${sliderPosition}%`,
               transform: "translateX(-50%)",
-              width: 36,
+              width: 32,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               pointerEvents: "none"
             }}
           >
-            {/* Vertical hairline */}
+            {/* Precision Hairline */}
             <div
               style={{
                 position: "absolute",
                 top: 0,
                 bottom: 0,
-                width: 2,
+                width: 1.5,
                 backgroundColor: "#FAF8F5",
-                boxShadow: "0 0 10px rgba(0,0,0,0.4)"
+                boxShadow: "0 0 4px rgba(0,0,0,0.5)"
               }}
             />
 
+            {/* Architectural Drafting Slider Indicator */}
             <div
               style={{
-                width: 36,
-                height: 36,
-                borderRadius: "50%",
+                width: 28,
+                height: 28,
+                borderRadius: 2,
                 backgroundColor: "var(--color-ivory-50)",
-                border: "2px solid var(--color-ink-900)",
-                boxShadow: "0 4px 14px rgba(0,0,0,0.35)",
+                border: "1.5px solid var(--color-ink-900)",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.25)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -298,11 +297,11 @@ export default function BeforeAfterViewer({
                 zIndex: 10
               }}
             >
-              <MoveHorizontal size={18} strokeWidth={2.2} />
+              <MoveHorizontal size={14} strokeWidth={2.4} />
             </div>
           </div>
 
-          {/* Interactive Architectural Callout Pins (Rendered on After Area) */}
+          {/* Precision Coordinate Pins (Clean architectural stamps, zero glowing halo) */}
           {showAnnotations &&
             annotations.map((ann) => {
               const isSelected = activeAnnotation?.id === ann.id;
@@ -326,21 +325,20 @@ export default function BeforeAfterViewer({
                 >
                   <div
                     style={{
-                      width: 26,
-                      height: 26,
-                      borderRadius: "50%",
+                      width: 22,
+                      height: 22,
+                      borderRadius: 2,
                       backgroundColor: isSelected ? "var(--color-ink-900)" : "var(--color-terracotta)",
                       color: "#FFF",
                       fontFamily: "var(--font-mono)",
-                      fontSize: 11,
+                      fontSize: 10,
                       fontWeight: 700,
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      boxShadow: isSelected
-                        ? "0 0 0 4px #FAF8F5, 0 4px 12px rgba(0,0,0,0.4)"
-                        : "0 0 0 3px rgba(255,255,255,0.85), 0 2px 8px rgba(0,0,0,0.3)",
-                      transition: "all 0.2s ease"
+                      border: "1.5px solid #FFFFFF",
+                      boxShadow: "0 2px 6px rgba(0,0,0,0.3)",
+                      transition: "transform 0.15s ease"
                     }}
                   >
                     0{ann.id}

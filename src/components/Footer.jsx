@@ -31,14 +31,14 @@ export default function Footer({ onOpenExport }) {
               <div style={{ display: "inline-flex", alignItems: "center", gap: 10 }}>
                 {/* Dark mode logo mark */}
                 <svg width="32" height="32" viewBox="0 0 36 36" fill="none">
-                  <rect width="36" height="36" rx="8" fill="#252B27" />
+                  <rect width="36" height="36" rx="4" fill="#252B27" />
                   <path d="M9 27V14C9 9.58 13.03 6 18 6C22.97 6 27 9.58 27 14V27" stroke="#FAF8F5" strokeWidth="1.8" strokeLinecap="round" />
                   <line x1="6" y1="27" x2="30" y2="27" stroke="#C8664B" strokeWidth="2" strokeLinecap="round" />
                   <circle cx="18" cy="14" r="4" fill="#C8664B" />
                   <line x1="18" y1="19" x2="18" y2="24" stroke="#FAF8F5" strokeWidth="1.2" strokeDasharray="1.5 1.5" />
                 </svg>
                 <span style={{ fontFamily: "var(--font-editorial)", fontSize: 20, color: "#FAF8F5", letterSpacing: "0.03em" }}>
-                  RoomRevive AI
+                  RoomRevive Studio
                 </span>
               </div>
             </div>
@@ -171,7 +171,7 @@ export default function Footer({ onOpenExport }) {
           }}
         >
           <div>
-            © 2026 RoomRevive AI Studio. Thoughtfully built for real homes.
+            © 2026 RoomRevive Studio. Built for rented spaces and real homes.
           </div>
           <div>
             Designed with human care, empathy, and architectural restraint.
