@@ -54,7 +54,7 @@ export default function Navbar({ onOpenExport }) {
               textTransform: "uppercase"
             }}
           >
-            VOL. 04 / RENTER ARCHIVE
+            MADE FOR RENTED ROOMS
           </span>
         </div>
 
@@ -66,7 +66,7 @@ export default function Navbar({ onOpenExport }) {
             style={{ fontSize: 13, padding: "8px 14px", display: "flex", alignItems: "center", gap: 6 }}
           >
             <Sliders size={14} strokeWidth={1.8} />
-            <span>Studio</span>
+            <span>Makeovers</span>
           </button>
 
           <button
@@ -75,7 +75,7 @@ export default function Navbar({ onOpenExport }) {
             style={{ fontSize: 13, padding: "8px 14px", display: "flex", alignItems: "center", gap: 6 }}
           >
             <Palette size={14} strokeWidth={1.8} />
-            <span>Swatches</span>
+            <span>Textures</span>
           </button>
 
           <button
@@ -84,7 +84,7 @@ export default function Navbar({ onOpenExport }) {
             style={{ fontSize: 13, padding: "8px 14px", display: "flex", alignItems: "center", gap: 6 }}
           >
             <span style={{ fontFamily: "var(--font-mono)", fontSize: 12 }}>₹</span>
-            <span>Budget Plan</span>
+            <span>Budget Guide</span>
           </button>
 
           <button
@@ -93,7 +93,7 @@ export default function Navbar({ onOpenExport }) {
             style={{ fontSize: 13, padding: "8px 14px", display: "flex", alignItems: "center", gap: 6 }}
           >
             <BookOpen size={14} strokeWidth={1.8} />
-            <span>Principles</span>
+            <span>Renter Rules</span>
           </button>
 
           <div
@@ -116,7 +116,7 @@ export default function Navbar({ onOpenExport }) {
             }}
           >
             <FileText size={13} />
-            <span>Export Spec</span>
+            <span>Save Room Plan</span>
           </button>
         </nav>
       </div>

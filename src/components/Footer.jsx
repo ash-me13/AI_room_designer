@@ -58,7 +58,7 @@ export default function Footer({ onOpenExport }) {
             </p>
 
             <p style={{ fontSize: 13, color: "var(--color-ink-400)", lineHeight: 1.6, maxWidth: 440 }}>
-              An independent studio publication and interior styling engine crafted for students, young professionals, and renters navigating small spaces.
+              A friendly design guide and room visualizer built for students and renters living in small spaces. Simple swaps, zero wall drilling, and no wasted money.
             </p>
           </div>
 
@@ -75,7 +75,7 @@ export default function Footer({ onOpenExport }) {
                 marginBottom: 16
               }}
             >
-              Studio Chapters
+              Explore RoomRevive
             </span>
 
             <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 10, fontSize: 13 }}>
@@ -84,7 +84,7 @@ export default function Footer({ onOpenExport }) {
                   onClick={() => scrollTo("studio-section")}
                   style={{ background: "none", border: "none", color: "var(--color-ivory-200)", cursor: "pointer", padding: 0, textAlign: "left" }}
                 >
-                  Interactive Room Visualizer
+                  Room Makeovers &amp; Visualizer
                 </button>
               </li>
               <li>
@@ -92,7 +92,7 @@ export default function Footer({ onOpenExport }) {
                   onClick={() => scrollTo("materials-section")}
                   style={{ background: "none", border: "none", color: "var(--color-ivory-200)", cursor: "pointer", padding: 0, textAlign: "left" }}
                 >
-                  Tactile Material Archive
+                  Textures &amp; Material Swatches
                 </button>
               </li>
               <li>
@@ -100,7 +100,7 @@ export default function Footer({ onOpenExport }) {
                   onClick={() => scrollTo("budget-section")}
                   style={{ background: "none", border: "none", color: "var(--color-ivory-200)", cursor: "pointer", padding: 0, textAlign: "left" }}
                 >
-                  Honest Budget Estimator (₹0–₹5,000)
+                  Budget Planner (₹0–₹5,000)
                 </button>
               </li>
               <li>
@@ -108,7 +108,7 @@ export default function Footer({ onOpenExport }) {
                   onClick={() => scrollTo("handbook-section")}
                   style={{ background: "none", border: "none", color: "var(--color-ivory-200)", cursor: "pointer", padding: 0, textAlign: "left" }}
                 >
-                  The Renter's Handbook
+                  The Renter's Playbook
                 </button>
               </li>
               <li>
@@ -116,13 +116,13 @@ export default function Footer({ onOpenExport }) {
                   onClick={onOpenExport}
                   style={{ background: "none", border: "none", color: "var(--color-terracotta-light)", cursor: "pointer", padding: 0, textAlign: "left" }}
                 >
-                  Export Printable Brief
+                  Save Printable Room Plan
                 </button>
               </li>
             </ul>
           </div>
 
-          {/* Colophon & Architectural Specs */}
+          {/* Colophon & Practical Specs */}
           <div>
             <span
               style={{
@@ -135,7 +135,7 @@ export default function Footer({ onOpenExport }) {
                 marginBottom: 16
               }}
             >
-              Colophon
+              Design Notes
             </span>
 
             <div style={{ display: "flex", flexDirection: "column", gap: 8, fontSize: 12, color: "var(--color-ink-400)" }}>
@@ -144,12 +144,12 @@ export default function Footer({ onOpenExport }) {
                 Fraunces (Editorial) &amp; Plus Jakarta Sans &amp; Space Mono
               </div>
               <div>
-                <strong style={{ color: "var(--color-ivory-200)", display: "block" }}>Studio Palette:</strong>
+                <strong style={{ color: "var(--color-ivory-200)", display: "block" }}>Color Palette:</strong>
                 Warm Ivory, Natural Jute, Terracotta, Muted Sage, Ink Charcoal
               </div>
               <div>
-                <strong style={{ color: "var(--color-ivory-200)", display: "block" }}>Damage Guarantee:</strong>
-                Zero plaster puncture • Zero deposit risk
+                <strong style={{ color: "var(--color-ivory-200)", display: "block" }}>Deposit Guarantee:</strong>
+                100% renter friendly • Zero wall holes
               </div>
             </div>
           </div>
@@ -171,10 +171,10 @@ export default function Footer({ onOpenExport }) {
           }}
         >
           <div>
-            © 2026 RoomRevive Studio. Built for rented spaces and real homes.
+            © 2026 RoomRevive. Built for rented spaces and real homes.
           </div>
           <div>
-            Designed with human care, empathy, and architectural restraint.
+            Designed with care for rented rooms and student budgets.
           </div>
         </div>
       </div>

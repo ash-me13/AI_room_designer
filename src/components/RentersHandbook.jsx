@@ -22,12 +22,12 @@ export default function RentersHandbook() {
           }}
           className="hero-grid"
         >
-          {/* Left Column: Studio Codex Masthead & Index */}
+          {/* Left Column: Handbook Intro & Directory */}
           <div style={{ position: "sticky", top: "90px" }}>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
-              <span className="badge-arch badge-sage">STUDIO CODEX</span>
+              <span className="badge-arch badge-sage">THE RENTER'S PLAYBOOK</span>
               <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--color-ink-500)" }}>
-                • VOL. 04
+                • ZERO WALL DAMAGE
               </span>
             </div>
 
@@ -41,14 +41,14 @@ export default function RentersHandbook() {
                 marginBottom: 16
               }}
             >
-              Four spatial canons for temporary living
+              Four simple rules we live by in rented rooms
             </h2>
 
             <p style={{ fontSize: 14, color: "var(--color-ink-700)", lineHeight: 1.6, marginBottom: 28 }}>
-              Field-tested principles compiled from years of living in student hostels and rented flats. Not generic buzzwords — physical, lease-safe architectural habits.
+              Hard-earned lessons from living in student hostels, PGs, and rented apartments. Nothing complicated or permanent — just smart, practical ways to feel at home without risking your deposit.
             </p>
 
-            {/* Quick Canon Directory */}
+            {/* Quick Rule Directory */}
             <div
               style={{
                 borderTop: "1px solid var(--color-ivory-300)",
@@ -66,7 +66,7 @@ export default function RentersHandbook() {
                   marginBottom: 12
                 }}
               >
-                INDEX OF CANONS
+                THE 4 GOLDEN RULES
               </span>
 
               <ol style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 10 }}>
@@ -97,7 +97,7 @@ export default function RentersHandbook() {
             </div>
           </div>
 
-          {/* Right Column: Serial Editorial Essays (No Repeating Cards) */}
+          {/* Right Column: Thoughtful Friendly Guides */}
           <div style={{ display: "flex", flexDirection: "column", gap: 40 }}>
             {RENTER_PRINCIPLES.map((principle, index) => (
               <article
@@ -127,14 +127,14 @@ export default function RentersHandbook() {
                 >
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                     <span style={{ color: "var(--color-terracotta)", fontWeight: 700 }}>
-                      CANON № {principle.number}
+                      RULE № {principle.number}
                     </span>
                     <span>•</span>
                     <span style={{ textTransform: "uppercase" }}>
-                      LEASE PROTOCOL
+                      DEPOSIT-SAFE HABIT
                     </span>
                   </div>
-                  <span>SECTION 0{index + 1}</span>
+                  <span>CHAPTER 0{index + 1}</span>
                 </div>
 
                 {/* Canon Title */}

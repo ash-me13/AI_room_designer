@@ -7,71 +7,71 @@ export const ROOM_PRESETS = [
   {
     id: "student-hostel",
     name: "Student Hostel & PG Room",
-    subtitle: "Single bed, tiled floor, harsh 6500K tube light, scuffed study desk",
+    subtitle: "Single bed, cold tile floor, buzzing tube light, and a scuffed study desk",
     dimensions: "3.2m × 2.8m (9.0 m² / ~96 sq.ft)",
     beforeImage: "/images/student_room_before_1791721144093.jpg",
-    beforeNotes: "Common issues: stark overhead tube lighting casting harsh shadows, cold linoleum/tile, exposed wire clutter under desk, flat poly-blend bedding.",
+    beforeNotes: "The typical student hostel setup: a blinding overhead tube light that strains your eyes, cold floor tiles, messy wires under the desk, and bedding that never feels cozy.",
     styles: {
       japandi: {
         id: "japandi",
         name: "Warm Minimalist & Japandi",
-        tagline: "Pale birch, rice-paper glow, and tactile linen layers",
+        tagline: "Warm paper lamps, calm wood accents, and cozy linen layers",
         paletteName: "Birch • Rice Paper • Flax Linen",
         accentColor: "#DDD2BF",
         swatches: ["flax-linen", "natural-jute"],
         afterImage: "/images/student_room_japandi_after_1791721184670.jpg",
-        description: "Replaces clinical white glare with 2700K warm paper lighting. A natural jute runner warms the cold tile, while layered flax-linen bedding adds tactile softness without repainting walls.",
+        description: "Turns off the blinding tube light and brings in soft 2700K paper lamplight. A natural jute runner keeps your bare feet off cold tiles, and layered linen bedding makes your bed feel like a calm retreat without painting a single wall.",
         keyChanges: [
-          "Swap overhead tube light for a warm 2700K plug-in rice paper lantern",
-          "Layer a 120×180cm woven jute runner over the tiled floor",
-          "Introduce a low birch riser for desk stationery and books",
-          "Fold textured linen throw over the foot of the bed"
+          "Turn off the tube light and plug in a warm 2700K rice paper globe",
+          "Roll out a woven jute runner to warm up the cold tiled floor",
+          "Add a simple wooden desk riser to clear clutter and hold books",
+          "Layer a soft textured linen throw across the foot of the bed"
         ],
         annotations: [
           {
             id: 1,
             x: 28,
             y: 35,
-            title: "2700K Ambient Lighting",
-            detail: "Rice paper globe pendant softens harsh shadow lines and warms off-white walls."
+            title: "2700K Paper Globe Lamp",
+            detail: "A soft paper globe softens sharp shadows and gives off-white walls a cozy evening glow."
           },
           {
             id: 2,
             x: 68,
             y: 42,
-            title: "Zero-Drill Floating Shelf",
-            detail: "Heavy-duty 5kg Command strip picture ledge for paperbacks and ceramic bud vase."
+            title: "Zero-Drill Picture Ledge",
+            detail: "Heavy-duty Command strips hold your favorite paperbacks and a small bud vase without drilling."
           },
           {
             id: 3,
             x: 48,
             y: 78,
-            title: "Braided Jute Floor Zone",
-            detail: "Natural woven texture masks clinical hospital-grade floor tiles with acoustic warmth."
+            title: "Woven Jute Floor Runner",
+            detail: "Brings natural warmth to cold hostel tiles so you don't step onto freezing floors in the morning."
           },
           {
             id: 4,
             x: 75,
             y: 65,
             title: "Desk Cable Tucking",
-            detail: "Hidden under-desk velcro raceway keeps charging cords invisible from the doorway."
+            detail: "Simple binder clips under the desk keep charging cords tucked neatly out of sight."
           }
         ]
       },
       terracotta: {
         id: "terracotta",
         name: "Earthy Terracotta & Clay",
-        tagline: "Warm sunbaked tones, woven fibers, and grounded comfort",
+        tagline: "Sunbaked earth tones, clay accents, and cozy amber lighting",
         paletteName: "Raw Clay • Burnt Umber • Sand",
         accentColor: "#C8664B",
         swatches: ["terracotta-clay", "natural-jute"],
         afterImage: "/images/student_room_terracotta_after_1791721285356.jpg",
-        description: "Infuses the room with sunbaked warmth through rust-orange textile accents, unglazed terracotta pottery, and amber-tinted ambient lamplight. Perfect for rooms lacking natural sun.",
+        description: "Brings cozy, sunbaked warmth into rooms that don't get much natural sunlight. Rust-orange pillow covers, real clay pots, and an amber reading lamp make a plain room feel grounded and lived-in.",
         keyChanges: [
-          "Rust-orange washed cotton pillow covers and bed runner",
-          "Unglazed terracotta desktop planter with snake plant",
-          "Amber Edison filament bulb in a brass clip-on lamp",
-          "Woven cane storage basket for laundry and extra blankets"
+          "Swap plain pillowcases for rust-orange washed cotton covers",
+          "Pop a hardy snake plant into an earthy unglazed clay pot",
+          "Clip an amber reading lamp to your bedframe or shelf",
+          "Keep laundry or extra blankets tidy in a woven cane basket"
         ],
         annotations: [
           {
@@ -79,60 +79,60 @@ export const ROOM_PRESETS = [
             x: 32,
             y: 30,
             title: "Amber Task Lamp",
-            detail: "Warm 2200K brass desk clamp brings cozy late-night study atmosphere."
+            detail: "Warm 2200K clamp light creates a cozy late-night study atmosphere without waking roommates."
           },
           {
             id: 2,
             x: 55,
             y: 62,
             title: "Terracotta Bed Runner",
-            detail: "Provides rich earth tone focal point against standard landlord-white sheets."
+            detail: "Adds a warm pop of rich earth tone across standard landlord-issued white sheets."
           },
           {
             id: 3,
             x: 82,
             y: 45,
             title: "Clay Planter & Snake Plant",
-            detail: "Low-maintenance greenery in breathable terracotta pot purifies stale hostel air."
+            detail: "Zero-effort greenery in a breathable clay pot that purifies stale hostel air and thrives on neglect."
           }
         ]
       },
       sage: {
         id: "sage",
         name: "Muted Sage & Botanical",
-        tagline: "Calming botanical hues, olive cotton, and light rattan",
+        tagline: "Calming botanical greens, washed cotton, and light rattan",
         paletteName: "Muted Sage • Olive • Light Rattan",
         accentColor: "#6B7F6D",
         swatches: ["sage-canvas", "flax-linen"],
         afterImage: "/images/student_room_sage_after_1791721320405.jpg",
-        description: "A restorative retreat from hectic campus life. Soft eucalyptus and sage textiles paired with light cane accents lower visual stress and bring natural elements indoors.",
+        description: "A quiet haven to unwind after long classes and study sessions. Muted eucalyptus greens and light cane textures bring nature inside and make a small space feel peaceful.",
         keyChanges: [
-          "Olive-green washed canvas cushion covers",
-          "Rattan desk organizer tray for daily essentials",
-          "Tension rod botanical curtain panel that leaves zero wall marks",
-          "Small pothos ivy trailing over a bookshelf corner"
+          "Add olive-green washed canvas cushion covers to your chair",
+          "Set out a small rattan tray for your daily keys, pens, and watch",
+          "Hang a light sheer curtain on a spring-tension rod (no screws needed)",
+          "Let an easy money plant or pothos drape gently over your bookshelf"
         ],
         annotations: [
           {
             id: 1,
             x: 30,
             y: 40,
-            title: "Tension Rod Curtain",
-            detail: "Spring-loaded rod hangs textured linen sheer without a single drilled screw."
+            title: "Spring-Tension Curtain",
+            detail: "Spring rod holds an airy linen sheer across the window without a single drilled hole."
           },
           {
             id: 2,
             x: 60,
             y: 58,
-            title: "Sage Duck Canvas Throw",
-            detail: "Durable, washable accent layer that resists accidental tea or coffee spills."
+            title: "Sage Canvas Pillow Cover",
+            detail: "Durable, washable accent layer that softens hard wooden hostel chairs."
           },
           {
             id: 3,
             x: 78,
             y: 36,
             title: "Trailing Pothos Vine",
-            detail: "Zero-damage suction hook allows healthy indoor vine to drape along the window sill."
+            detail: "Thrives in indirect light and brings vibrant life to empty rental corners."
           }
         ]
       }
@@ -141,25 +141,25 @@ export const ROOM_PRESETS = [
   {
     id: "rental-studio",
     name: "Small Rental Studio / 1RK",
-    subtitle: "Multipurpose living-sleeping space, rental beige walls, mismatched furniture",
+    subtitle: "All-in-one living and sleeping space, landlord-white walls, and mismatched furniture",
     dimensions: "4.1m × 3.6m (14.8 m² / ~159 sq.ft)",
     beforeImage: "/images/renter_studio_before_1791721346719.jpg",
-    beforeNotes: "Common issues: awkward sightline where the bed is immediately visible from entrance, bare off-white walls, harsh overhead light, general furniture sprawl.",
+    beforeNotes: "The common studio struggle: your bed is the first thing anyone sees from the front door, walls feel empty and echoey, and overhead lighting feels sterile.",
     styles: {
       japandi: {
         id: "japandi",
         name: "Warm Minimalist & Japandi",
-        tagline: "Zoned visual partitions, neutral textured textiles, and soft corners",
+        tagline: "Cozy visual zones, calm textiles, and soft lighting",
         paletteName: "Oatmeal • Pale Oak • Warm Stone",
         accentColor: "#DDD2BF",
         swatches: ["flax-linen", "natural-jute"],
         afterImage: "/images/renter_studio_after_1791721374592.jpg",
-        description: "Creates intentional visual zones without building walls. Uses a low open shelf as a room divider, a cozy textured floor rug to anchor the seating corner, and warm floor lamps.",
+        description: "Creates clear, cozy zones without putting up permanent walls. A low open bookshelf gently shields your bed from the doorway, a textured rug anchors your seating area, and warm floor lamps make evenings feel restful.",
         keyChanges: [
-          "Low open bookshelf functioning as an airy, non-blocking room divider",
-          "Large textured flatweave rug anchoring the resting zone",
-          "Floor-standing paper lantern providing soft evening illumination",
-          "Neutral waffle throw to harmonize mismatched rental sofa/futon"
+          "Use a low open bookshelf as an airy room divider that lets sunlight through",
+          "Roll out a large textured rug to clearly define your relaxation corner",
+          "Place a warm paper floor lamp to light the room gently from below eye level",
+          "Drape a textured waffle throw over mismatched rental furniture"
         ],
         annotations: [
           {
@@ -167,37 +167,37 @@ export const ROOM_PRESETS = [
             x: 24,
             y: 48,
             title: "Open Divider Shelf",
-            detail: "Defines entry hallway from sleeping area without cutting off daylight or airflow."
+            detail: "Gently separates your entryway from the bed without blocking precious window daylight."
           },
           {
             id: 2,
             x: 65,
             y: 32,
-            title: "Warm Diffuse Paper Lantern",
-            detail: "Floor lantern with 2700K 9W LED bulb completely eliminates clinical ceiling glare."
+            title: "Paper Floor Lamp",
+            detail: "Warm 2700K light fills the room at eye level, so you never have to turn on harsh ceiling fixtures."
           },
           {
             id: 3,
             x: 52,
             y: 74,
-            title: "Zone Defining Rug",
-            detail: "Visually unifies the seating space and cushions footsteps for acoustic dampening."
+            title: "Seating Zone Rug",
+            detail: "Cushions steps, dampens room echoes, and creates a cozy nook to kick back with friends."
           }
         ]
       },
       terracotta: {
         id: "terracotta",
         name: "Earthy Terracotta & Clay",
-        tagline: "Warm sunset palette, textured cushions, and ceramic accents",
+        tagline: "Warm sunset tones, comfortable cushions, and earthy ceramics",
         paletteName: "Rust • Terracotta • Natural Wood",
         accentColor: "#C8664B",
         swatches: ["terracotta-clay", "natural-jute"],
         afterImage: "/images/student_room_terracotta_after_1791721285356.jpg",
-        description: "Brings depth to open studio spaces through warm earthy textiles, clay vessels, and ambient lighting.",
+        description: "Gives an open studio warm personality with rich rust cushions, clay accents, and soft warm lighting that makes the space feel like home.",
         keyChanges: [
-          "Terracotta throw cushions and oversized textured floor cushion",
-          "Warm brass plug-in sconce mounted on adhesive strips",
-          "Woven storage baskets for shoes and gym equipment"
+          "Layer terracotta throw cushions and a comfortable floor pillow for guests",
+          "Add a warm clip-on reading lamp to your bedframe or shelf",
+          "Tuck shoes and gym gear into woven cane baskets"
         ],
         annotations: [
           {
@@ -205,31 +205,31 @@ export const ROOM_PRESETS = [
             x: 35,
             y: 45,
             title: "Terracotta Accent Layer",
-            detail: "Breaks up cold rental walls with inviting natural warmth."
+            detail: "Breaks up cold rental walls and gives the space an inviting, grounded warmth."
           }
         ]
       },
       sage: {
         id: "sage",
         name: "Muted Sage & Botanical",
-        tagline: "Airy greens, linen drapes, and organic comfort",
+        tagline: "Airy greens, breezy curtains, and calm organic textures",
         paletteName: "Sage • Washed Canvas • Natural Linen",
         accentColor: "#6B7F6D",
         swatches: ["sage-canvas", "flax-linen"],
         afterImage: "/images/student_room_sage_after_1791721320405.jpg",
-        description: "Transforms a generic city studio into a peaceful botanical sanctuary using easy-care plants and calming tones.",
+        description: "Turns a generic rented flat into a peaceful botanical sanctuary with easy-care houseplants, soft sage cottons, and zero wall holes.",
         keyChanges: [
-          "Sage cotton throw and botanical framed line-art",
-          "Floor plant in lightweight woven basket",
-          "Warm glow bedside reading light"
+          "Add a sage cotton bed runner and framed botanical prints hung with Command strips",
+          "Place a low-maintenance floor plant in a woven basket",
+          "Keep warm bedside lamps for relaxing evening reads"
         ],
         annotations: [
           {
             id: 1,
             x: 42,
             y: 50,
-            title: "Botanical Rest Zone",
-            detail: "Quiet visual rhythm through balanced green tones and natural wood."
+            title: "Botanical Rest Corner",
+            detail: "Soft green textures and leafy plants lower stress and make tiny flats feel fresh."
           }
         ]
       }
@@ -281,8 +281,8 @@ export const CHECKLIST_ITEMS = [
   {
     id: "free-1",
     category: "free",
-    title: "Tuck snake wiring into binder clips",
-    description: "Clamp binder clips to the rear edge of your desk and run charger cables through the metal loops. Eliminates 70% of visual desk clutter.",
+    title: "Tuck charging cords into desk binder clips",
+    description: "Clamp binder clips to the back edge of your desk and feed your charger cords through the metal loops. Stops messy cords from falling on the floor.",
     cost: 0,
     time: "10 mins",
     difficulty: "Effortless",
@@ -291,8 +291,8 @@ export const CHECKLIST_ITEMS = [
   {
     id: "free-2",
     category: "free",
-    title: "Bed alignment to natural light angle",
-    description: "Shift your bed 30–40cm away from the dark corner toward window light. Opens up doorway sightlines and makes small rooms breathe.",
+    title: "Shift your bed toward natural window light",
+    description: "Move your bed 30–40cm away from the dark corner toward natural window light. It clears your doorway and instantly makes the room feel more spacious.",
     cost: 0,
     time: "15 mins",
     difficulty: "Medium",
@@ -301,8 +301,8 @@ export const CHECKLIST_ITEMS = [
   {
     id: "free-3",
     category: "free",
-    title: "Hospital-corners bedding tuck",
-    description: "Tuck bedsheet corners at neat 45° angles. Instantly converts messy hostel bedding into a tailored, boutique hotel look.",
+    title: "Tuck your bedding with neat hospital corners",
+    description: "Tuck bedsheet corners in tightly at a 45° angle. Takes two minutes and makes simple bedding look clean and intentional.",
     cost: 0,
     time: "5 mins",
     difficulty: "Easy",
@@ -311,8 +311,8 @@ export const CHECKLIST_ITEMS = [
   {
     id: "free-4",
     category: "free",
-    title: "Tray grouping rule for loose items",
-    description: "Place perfume, keys, and watches onto a single ceramic plate or shallow lid. 15 scattered objects look messy; 15 objects in one tray look curated.",
+    title: "Use a small tray for everyday pocket clutter",
+    description: "Put your keys, watch, wallet, and lip balm onto a single small ceramic plate. A group of scattered items looks messy, but on a tray it looks tidy.",
     cost: 0,
     time: "5 mins",
     difficulty: "Effortless",
@@ -323,8 +323,8 @@ export const CHECKLIST_ITEMS = [
   {
     id: "diy-1",
     category: "diy",
-    title: "Rice-paper diffuser shade over bulb",
-    description: "Inexpensive 30cm paper lantern sphere hung over harsh bare bulbs. Diffuses sharp glare into soft, flattering 360° warmth.",
+    title: "Soft paper lantern over a bare ceiling bulb",
+    description: "Hang an inexpensive 30cm paper globe shade over a harsh bare bulb. It turns sharp glare into soft, flattering 360° warmth.",
     cost: 320,
     time: "10 mins",
     difficulty: "Easy",
@@ -333,8 +333,8 @@ export const CHECKLIST_ITEMS = [
   {
     id: "diy-2",
     category: "diy",
-    title: "Peel-and-stick woodgrain desk cover",
-    description: "Removable vinyl contact paper over a scratched hostel plywood desktop. Zero residue when peeled off with a hair dryer.",
+    title: "Peel-and-stick woodgrain film for a worn desk",
+    description: "Cover a scratched hostel desk with removable contact paper. When moving out, warm it with a hair dryer and it peels off without sticky residue.",
     cost: 420,
     time: "25 mins",
     difficulty: "Medium",
@@ -343,8 +343,8 @@ export const CHECKLIST_ITEMS = [
   {
     id: "diy-3",
     category: "diy",
-    title: "Washi tape postcard & photo grid",
-    description: "Japanese washi paper tape holds postcards, exhibition prints, or photos securely without lifting rental wall paint upon removal.",
+    title: "Washi tape photo and postcard wall",
+    description: "Use Japanese washi paper tape to hang photos, art prints, and postcards. It holds securely and peels cleanly off rental paint without a tear.",
     cost: 160,
     time: "20 mins",
     difficulty: "Fun",
@@ -353,8 +353,8 @@ export const CHECKLIST_ITEMS = [
   {
     id: "diy-4",
     category: "diy",
-    title: "Jute twine hanging plant cradle",
-    description: "Simple DIY macrame knotting with natural jute string to suspend a lightweight ivy from a curtain rod bracket.",
+    title: "Hanging plant cradle made with jute string",
+    description: "Tie a quick macrame loop with natural jute string to suspend a trailing ivy from your curtain rod bracket without drilling.",
     cost: 110,
     time: "15 mins",
     difficulty: "Easy",
@@ -365,8 +365,8 @@ export const CHECKLIST_ITEMS = [
   {
     id: "buy-1",
     category: "buy",
-    title: "Heavy-duty Command picture hanging strips (4-pack)",
-    description: "Interlocking dual-lock adhesive strips rated for up to 7.2kg. Holds frames flat to the wall and pulls off cleanly without plaster damage.",
+    title: "Command picture hanging strips (4-pack)",
+    description: "Interlocking adhesive strips that hold framed prints flat to the wall and pull off cleanly when moving out. Zero nail holes.",
     cost: 380,
     time: "5 mins",
     difficulty: "Effortless",
@@ -375,8 +375,8 @@ export const CHECKLIST_ITEMS = [
   {
     id: "buy-2",
     category: "buy",
-    title: "2700K Warm LED clamp task lamp (frosted globe)",
-    description: "Clamps to bedhead, shelf, or desk edge. Provides localized golden amber light so you never need to turn on the harsh ceiling tube.",
+    title: "2700K warm LED clamp lamp",
+    description: "Clamps to your bed frame, desk, or bookshelf. Gives you warm golden light for late-night reading without disturbing roommates.",
     cost: 590,
     time: "2 mins",
     difficulty: "Instant",
@@ -386,7 +386,7 @@ export const CHECKLIST_ITEMS = [
     id: "buy-3",
     category: "buy",
     title: "Braided natural jute floor runner (60×120cm)",
-    description: "Covers the cold path between bed and desk. Naturally durable, hides scuffs, and gives tactile grounding underfoot.",
+    description: "Rolls out right beside your bed. Keeps your bare feet off freezing tile floors and rolls up easily on move-out day.",
     cost: 750,
     time: "1 min",
     difficulty: "Instant",
@@ -395,8 +395,8 @@ export const CHECKLIST_ITEMS = [
   {
     id: "buy-4",
     category: "buy",
-    title: "Washed waffle-weave cotton bed runner (180×50cm)",
-    description: "Adds rich textural contrast across the foot of the bed without having to buy expensive new complete sheet sets.",
+    title: "Washed waffle-weave cotton bed runner",
+    description: "Drapes across the foot of your bed for an instant texture upgrade without buying an expensive new bedding set.",
     cost: 650,
     time: "1 min",
     difficulty: "Instant",
@@ -405,8 +405,8 @@ export const CHECKLIST_ITEMS = [
   {
     id: "buy-5",
     category: "buy",
-    title: "Spring-tension shower/window curtain rod",
-    description: "Installs in 30 seconds by expanding between two doorframes or window jambs. No drilling, holds up to 10kg of lightweight fabric.",
+    title: "Spring-tension curtain rod",
+    description: "Twists into place between window frames or doorways in 30 seconds. No drilling, holds light linen curtains, and leaves zero marks.",
     cost: 480,
     time: "5 mins",
     difficulty: "Easy",
@@ -418,25 +418,25 @@ export const RENTER_PRINCIPLES = [
   {
     number: "01",
     title: "Light the corners, not the ceiling",
-    body: "Harsh 6500K fluorescent tubes flatten rooms and cast unflattering institutional shadows. Turn off the ceiling fixture and introduce 2 to 3 low-wattage 2700K warm lamps at varying heights: one on your desk, one beside your bed, one bouncing off an ivory wall.",
-    quote: "Warmth comes from pools of light, not an overhead spotlight."
+    body: "Harsh fluorescent tube lights flatten small rooms and give you headaches. Turn off the overhead fixture and place two or three warm 2700K lamps at different heights: one on your desk, one by your bed, and one bouncing softly off an empty wall.",
+    quote: "Warmth comes from soft pools of light, not an overhead interrogation beam."
   },
   {
     number: "02",
-    title: "Texture replaces paint when landlords forbid color",
-    body: "If your landlord strictly bans painting walls, don't despair with beige. Bring depth through tactile contrast: rough woven jute underfoot, crinkled washed linen on the mattress, smooth unglazed clay on the desk, and ribbed glass for water carafes.",
-    quote: "Monochrome looks rich when the materials have touchable grain."
+    title: "When landlords ban paint, rely on texture",
+    body: "If your rental agreement says no painting, don't worry about living in a plain white box. Layer tactile textures instead: a woven jute runner underfoot, crinkled washed linen on the bed, matte clay on your desk, and ribbed glassware for water.",
+    quote: "Neutral colors feel rich and inviting when the materials have touchable grain."
   },
   {
     number: "03",
-    title: "Height is your secret square footage",
-    body: "When floor space is tiny, eyes naturally feel boxed in. Draw gaze upward with vertical tension rods, zero-damage Command picture ledges placed at 160cm eye level, and trailing foliage that cascades from the top shelf.",
-    quote: "Small footprints feel double their size when the vertical axis is active."
+    title: "Think vertical when square footage is tight",
+    body: "When floor space is limited, clutter piles up quickly. Lift the room's energy upward with spring-tension rods, adhesive picture ledges at eye level, and an easy pothos plant trailing from a top shelf.",
+    quote: "Small rooms feel twice as spacious when you draw the eye up."
   },
   {
     number: "04",
     title: "The 11-Month Rule",
-    body: "If you cannot pack it into an Uber trunk or carry it down three flights of stairs when your lease renews in 11 months, don't buy it. Invest in lightweight textiles, collapsible paper lamps, and versatile organizers that adapt to your next apartment.",
-    quote: "True renter elegance is nomadic and damage-free."
+    body: "If you can't easily pack it into a cab or carry it down three flights of stairs when your lease ends, think twice before buying it. Focus on lightweight textiles, collapsible paper lamps, and versatile organizers that move with you.",
+    quote: "The best rental pieces are lightweight, durable, and easy to pack."
   }
 ];

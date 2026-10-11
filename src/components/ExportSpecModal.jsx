@@ -51,7 +51,7 @@ export default function ExportSpecModal({ isOpen, onClose }) {
           className="no-print"
         >
           <span className="badge-arch badge-terracotta">
-            STUDIO DESIGN BRIEF • ISSUE 04
+            YOUR ROOM PLAN • READY TO PRINT
           </span>
 
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -61,7 +61,7 @@ export default function ExportSpecModal({ isOpen, onClose }) {
               style={{ fontSize: 13, padding: "8px 16px", gap: 6 }}
             >
               <Printer size={14} />
-              <span>Print / Save PDF</span>
+              <span>Print or Save PDF</span>
             </button>
             <button
               onClick={onClose}
@@ -85,14 +85,14 @@ export default function ExportSpecModal({ isOpen, onClose }) {
                 marginTop: 8
               }}
             >
-              Document Ref: RR-STUDIO-2026-04 • Renter-Safe Certified
+              Created with RoomRevive • 100% deposit safe &amp; landlord friendly
             </p>
           </div>
 
           <div style={{ textAlign: "right", fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--color-ink-600)" }}>
             <div>Date: October 2026</div>
-            <div>Room Scope: 9.0 m² (~96 sq.ft)</div>
-            <div style={{ color: "var(--color-sage-dark)", fontWeight: 700 }}>Zero-Damage Index: 100%</div>
+            <div>Room size: ~96 sq.ft</div>
+            <div style={{ color: "var(--color-sage-dark)", fontWeight: 700 }}>Wall damage: Exactly 0%</div>
           </div>
         </div>
 
@@ -115,7 +115,7 @@ export default function ExportSpecModal({ isOpen, onClose }) {
               marginBottom: 12
             }}
           >
-            Design Direction &amp; Architectural Focus
+            Summary of your room changes
           </h3>
 
           <div
@@ -128,21 +128,21 @@ export default function ExportSpecModal({ isOpen, onClose }) {
           >
             <div>
               <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "var(--color-ink-500)", textTransform: "uppercase" }}>
-                Selected Palette
+                Chosen Style
               </span>
               <p style={{ fontWeight: 600, color: "var(--color-ink-900)" }}>Warm Minimalist &amp; Japandi</p>
             </div>
             <div>
               <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "var(--color-ink-500)", textTransform: "uppercase" }}>
-                Lighting Temperature
+                Lighting Swaps
               </span>
-              <p style={{ fontWeight: 600, color: "var(--color-ink-900)" }}>2700K Warm Ambient (Paper Globe)</p>
+              <p style={{ fontWeight: 600, color: "var(--color-ink-900)" }}>2700K Warm Paper Globe</p>
             </div>
             <div>
               <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "var(--color-ink-500)", textTransform: "uppercase" }}>
-                Core Floor Textile
+                Floor Layer
               </span>
-              <p style={{ fontWeight: 600, color: "var(--color-ink-900)" }}>100% Braided Jute Runner (120×180cm)</p>
+              <p style={{ fontWeight: 600, color: "var(--color-ink-900)" }}>Braided Jute Runner (120×180cm)</p>
             </div>
           </div>
         </div>
@@ -158,7 +158,7 @@ export default function ExportSpecModal({ isOpen, onClose }) {
               marginBottom: 12
             }}
           >
-            Execution Schedule
+            Your checklist &amp; estimated costs
           </h4>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 8, fontSize: 13 }}>
@@ -181,7 +181,7 @@ export default function ExportSpecModal({ isOpen, onClose }) {
             <div style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: "8px 0", borderBottom: "1px solid var(--color-ivory-200)" }}>
               <span style={{ fontFamily: "var(--font-mono)", color: "var(--color-sage-dark)", fontWeight: 700 }}>[03]</span>
               <div style={{ flex: 1 }}>
-                <strong>Command picture hanging strips (4-pack)</strong> — rated up to 7.2kg zero wall peel.
+                <strong>Command picture hanging strips (4-pack)</strong> — holds tight without peeling paint.
               </div>
               <span style={{ fontFamily: "var(--font-mono)" }}>₹380</span>
             </div>
@@ -208,11 +208,11 @@ export default function ExportSpecModal({ isOpen, onClose }) {
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
             <ShieldCheck size={16} color="var(--color-sage-dark)" />
             <strong style={{ fontSize: 13, color: "var(--color-ink-900)" }}>
-              Landlord Move-Out Inspection Note:
+              Deposit safety promise:
             </strong>
           </div>
           <p style={{ fontSize: 12, color: "var(--color-ink-700)", lineHeight: 1.5 }}>
-            All fixtures specified are non-destructive and removable in under 15 minutes without plaster spackling or paint touch-ups. Full security deposit retention guaranteed.
+            Every single item on this list can be removed in under 15 minutes. No plaster repairs, no paint touch-ups, and no awkward arguments with your landlord when moving out.
           </p>
         </div>
       </div>

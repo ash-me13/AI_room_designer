@@ -32,7 +32,7 @@ export default function Hero() {
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
             <span className="badge-arch badge-terracotta">
               <span style={{ width: 6, height: 6, borderRadius: "50%", backgroundColor: "var(--color-terracotta)", display: "inline-block" }} />
-              STUDIO FIELD NOTE № 01
+              PRACTICAL RENTER GUIDE
             </span>
             <span
               style={{
@@ -42,7 +42,7 @@ export default function Hero() {
                 letterSpacing: "0.04em"
               }}
             >
-              • ZERO HOLES • ZERO DRILLS
+              • NO WALL HOLES • NO LOST DEPOSIT
             </span>
           </div>
 
@@ -74,7 +74,7 @@ export default function Hero() {
               marginBottom: 32
             }}
           >
-            RoomRevive is an interior architecture and spatial design studio engineered specifically for small rental flats, student hostels, and cramped PG bedrooms. We design around lease restrictions, landlord rules, and real student budgets from ₹0 to ₹5,000.
+            Most rented rooms feel cold or chaotic not because they're small, but because they're stuck with landlord-white walls, buzzing tube lights, and furniture you can't move. We help you turn cramped hostel rooms and PG flats into calm, cozy spaces — working strictly with zero-drill tricks, lease-safe swaps, and student budgets from ₹0 to ₹5,000.
           </p>
 
           {/* Action CTAs */}
@@ -84,7 +84,7 @@ export default function Hero() {
               className="btn btn-primary"
               style={{ padding: "13px 26px", fontSize: 15 }}
             >
-              <span>Explore Spatial Studio</span>
+              <span>Let's revive your room</span>
               <ArrowDown size={15} />
             </button>
 
@@ -93,11 +93,11 @@ export default function Hero() {
               className="btn btn-secondary"
               style={{ padding: "13px 22px", fontSize: 14 }}
             >
-              <span>View ₹0 Free Interventions</span>
+              <span>Explore ₹0 free fixes</span>
             </button>
           </div>
 
-          {/* Integrated Architectural Protocol Strip (Replaces repeating 3-card layout) */}
+          {/* Integrated Friendly Protocol Strip */}
           <div
             style={{
               backgroundColor: "var(--color-ivory-100)",
@@ -119,8 +119,8 @@ export default function Hero() {
                 justifyContent: "space-between"
               }}
             >
-              <span>CORE ARCHITECTURAL PROTOCOLS</span>
-              <span>VERIFIED LEASE-SAFE</span>
+              <span>HOW WE KEEP YOUR DEPOSIT SAFE</span>
+              <span>100% RENTER-TESTED</span>
             </div>
 
             <div
@@ -135,11 +135,11 @@ export default function Hero() {
                 <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 2 }}>
                   <ShieldCheck size={13} color="var(--color-sage-dark)" />
                   <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 700, color: "var(--color-ink-900)" }}>
-                    ZERO WALL DAMAGE
+                    ZERO NAIL HOLES
                   </span>
                 </div>
                 <p style={{ fontSize: 11, color: "var(--color-ink-600)", lineHeight: 1.4 }}>
-                  Tension rods &amp; Command mounts only.
+                  Only Command hooks, tension rods, &amp; clean-peel tape.
                 </p>
               </div>
 
@@ -147,11 +147,11 @@ export default function Hero() {
                 <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 2 }}>
                   <Ruler size={13} color="var(--color-terracotta)" />
                   <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 700, color: "var(--color-ink-900)" }}>
-                    COMPACT FOOTPRINT
+                    TIGHT SPACES FIRST
                   </span>
                 </div>
                 <p style={{ fontSize: 11, color: "var(--color-ink-600)", lineHeight: 1.4 }}>
-                  Engineered for 80–180 sq.ft rooms.
+                  Thought out for 80 to 180 sq.ft rooms and single bunks.
                 </p>
               </div>
 
@@ -159,11 +159,11 @@ export default function Hero() {
                 <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 2 }}>
                   <Compass size={13} color="var(--color-ink-800)" />
                   <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 700, color: "var(--color-ink-900)" }}>
-                    TRANSPARENT COSTS
+                    HONEST BUDGETS
                   </span>
                 </div>
                 <p style={{ fontSize: 11, color: "var(--color-ink-600)", lineHeight: 1.4 }}>
-                  Real street market verified prices.
+                  Real prices from local markets and fast deliveries.
                 </p>
               </div>
             </div>
@@ -197,11 +197,11 @@ export default function Hero() {
                 color: "var(--color-ink-600)"
               }}
             >
-              <span>CASE STUDY № 82 • HOSTEL BEDROOM</span>
-              <span className="badge-arch badge-sage">POST-INTERVENTION</span>
+              <span>TYPICAL 95 SQ.FT HOSTEL ROOM</span>
+              <span className="badge-arch badge-sage">AFTER SIMPLE SWAPS</span>
             </div>
 
-            {/* Visual Image with architectural overlay (Solid tags, NO glassmorphism blur) */}
+            {/* Visual Image with friendly overlay tags */}
             <div style={{ position: "relative", overflow: "hidden", borderRadius: "var(--radius-xs)" }}>
               <img
                 src="/images/student_room_japandi_after_1791721184670.jpg"
@@ -214,7 +214,7 @@ export default function Hero() {
                 }}
               />
 
-              {/* Architectural measurement tags - Solid, Crisp, Technical */}
+              {/* Tags */}
               <div
                 style={{
                   position: "absolute",
@@ -230,7 +230,7 @@ export default function Hero() {
                   border: "1px solid var(--color-ink-600)"
                 }}
               >
-                LIGHTING: 2700K DIFFUSE
+                WARM 2700K PAPER LIGHT
               </div>
 
               <div
@@ -248,10 +248,10 @@ export default function Hero() {
                   border: "1px solid var(--color-ink-600)"
                 }}
               >
-                FLOOR: 100% BRAIDED JUTE
+                NATURAL JUTE FLOOR RUNNER
               </div>
 
-              {/* Pin point sample - Clean architectural coordinate pin, no glowing halo */}
+              {/* Pin point sample */}
               <div
                 style={{
                   position: "absolute",
@@ -295,12 +295,12 @@ export default function Hero() {
                     whiteSpace: "nowrap"
                   }}
                 >
-                  Paper globe pendant
+                  ₹320 paper globe lamp
                 </div>
               </div>
             </div>
 
-            {/* Architectural Field Record beneath image */}
+            {/* Field Record beneath image */}
             <div
               style={{
                 marginTop: 14,
@@ -319,7 +319,7 @@ export default function Hero() {
                     marginBottom: 2
                   }}
                 >
-                  Field Observation: Fluorescent glare decommissioned; layered rice-paper diffusion &amp; floor jute.
+                  "Turned off the buzzing tube light, hung a warm paper globe, and rolled out a jute rug."
                 </p>
                 <span
                   style={{
@@ -329,7 +329,7 @@ export default function Hero() {
                     textTransform: "uppercase"
                   }}
                 >
-                  Floor scope: 9.0 m² • Documented budget: ₹1,850
+                  Floor area: ~95 sq.ft • Total spent: ₹1,850
                 </span>
               </div>
 

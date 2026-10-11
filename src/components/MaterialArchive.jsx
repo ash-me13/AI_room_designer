@@ -17,9 +17,9 @@ export default function MaterialArchive() {
         {/* Header */}
         <div style={{ marginBottom: 36 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
-            <span className="badge-arch">TACTILE ARCHIVE</span>
+            <span className="badge-arch">TEXTURES &amp; FABRICS</span>
             <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--color-ink-500)" }}>
-              • SENSORY TEXTURES FOR LEASED SPACES
+              • BRINGING PLAIN ROOMS TO LIFE
             </span>
           </div>
 
@@ -34,7 +34,7 @@ export default function MaterialArchive() {
             Texture replaces paint when landlords forbid color
           </h2>
           <p style={{ fontSize: 15, color: "var(--color-ink-600)", marginTop: 6, maxWidth: 640 }}>
-            In rental flats where repainting walls is penalized with deposit cuts, physical texture provides depth. Explore our studio's four workhorse materials.
+            When your landlord bans repainting walls, don't worry. Real warmth comes from materials you can actually touch: breathable linen, rustic braided jute, earthy clay, and soft ribbed textiles. Here are four affordable materials that make any rental feel rich.
           </p>
         </div>
 
@@ -155,7 +155,7 @@ export default function MaterialArchive() {
                   border: "1px solid var(--color-ink-600)"
                 }}
               >
-                MACRO WEAVE SPECIMEN
+                MACRO TEXTURE VIEW
               </div>
             </div>
 
@@ -197,7 +197,7 @@ export default function MaterialArchive() {
                     marginBottom: 4
                   }}
                 >
-                  Why It Solves Renter Headaches
+                  Why it works so well in rentals
                 </span>
                 <p style={{ fontSize: 13, color: "var(--color-ink-800)", lineHeight: 1.5 }}>
                   {activeSwatch.renterTip}
@@ -216,7 +216,7 @@ export default function MaterialArchive() {
                     marginBottom: 4
                   }}
                 >
-                  Recommended Applications
+                  Best places to use it
                 </span>
                 <p style={{ fontSize: 13, color: "var(--color-ink-700)" }}>
                   {activeSwatch.bestFor}

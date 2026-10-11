@@ -94,7 +94,7 @@ export default function BeforeAfterViewer({
               letterSpacing: "0.04em"
             }}
           >
-            INTERACTIVE COMPARISON
+            SEE THE DIFFERENCE
           </span>
           <span style={{ color: "var(--color-ivory-300)" }}>|</span>
           <span
@@ -114,10 +114,10 @@ export default function BeforeAfterViewer({
             onClick={() => setShowAnnotations(!showAnnotations)}
             className={`btn ${showAnnotations ? "btn-secondary" : "btn-ghost"}`}
             style={{ fontSize: 12, padding: "5px 10px" }}
-            title="Toggle architectural callout pins"
+            title="Toggle room design tips"
           >
             <Layers size={13} />
-            <span className="hide-mobile">Annotations</span> ({annotations.length})
+            <span className="hide-mobile">Design Tips</span> ({annotations.length})
           </button>
 
           <div style={{ display: "inline-flex", background: "var(--color-ivory-200)", borderRadius: 4, padding: 2 }}>
@@ -214,7 +214,7 @@ export default function BeforeAfterViewer({
               }}
             />
 
-            {/* Before Technical Stamp (Solid, Crisp, No Glassmorphic Blur) */}
+            {/* Before Friendly Stamp */}
             <div
               style={{
                 position: "absolute",
@@ -230,11 +230,11 @@ export default function BeforeAfterViewer({
                 border: "1px solid var(--color-ink-600)"
               }}
             >
-              PRE-EXISTING STATE
+              BEFORE (PLAIN &amp; COLD)
             </div>
           </div>
 
-          {/* After Technical Stamp (Solid, Crisp, No Glassmorphic Blur) */}
+          {/* After Friendly Stamp */}
           <div
             style={{
               position: "absolute",
@@ -250,7 +250,7 @@ export default function BeforeAfterViewer({
               border: "1px solid rgba(255, 255, 255, 0.25)"
             }}
           >
-            INTERVENTION PLAN
+            AFTER (WARM &amp; COZY)
           </div>
 
           {/* Precision Architectural Vernier Slider Divider */}
@@ -501,7 +501,7 @@ export default function BeforeAfterViewer({
             className="btn btn-ghost"
             style={{ fontSize: 11, padding: "4px 8px", fontFamily: "var(--font-mono)" }}
           >
-            Close ✕
+            Done ✕
           </button>
         </div>
       )}
@@ -522,10 +522,10 @@ export default function BeforeAfterViewer({
       >
         <span style={{ display: "flex", alignItems: "center", gap: 6 }}>
           <MoveHorizontal size={13} />
-          <span>Drag the center divider left/right to reveal before vs after</span>
+          <span>Drag the divider left or right to see before vs after</span>
         </span>
         <span className="hide-mobile">
-          Zero wall holes required • 100% Renter safe
+          Zero wall damage • 100% deposit safe
         </span>
       </div>
     </div>

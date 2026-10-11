@@ -84,7 +84,7 @@ export default function BrandLogo({ size = 36, showText = true }) {
               marginTop: 2
             }}
           >
-            Renter-Safe Interior Lab
+            Friendly design for rented rooms
           </span>
         </div>
       )}

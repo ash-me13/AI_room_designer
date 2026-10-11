@@ -47,14 +47,14 @@ export default function BudgetPlanner({ onExportBrief }) {
       }}
     >
       <div style={{ maxWidth: "var(--container-max)", margin: "0 auto" }}>
-        {/* Section Header: Architectural Ledger Format */}
+        {/* Section Header: Friendly Budget Planner */}
         <div style={{ marginBottom: 36 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
             <span className="badge-arch badge-terracotta">
-              COST SCHEDULE // BILL OF QUANTITIES
+              HONEST BUDGET PLANNER
             </span>
             <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--color-ink-500)" }}>
-              • LOCAL MARKET VALUATION
+              • PRICED FOR REAL STUDENT BUDGETS
             </span>
           </div>
 
@@ -76,14 +76,14 @@ export default function BudgetPlanner({ onExportBrief }) {
                   color: "var(--color-ink-900)"
                 }}
               >
-                Cost-calibrated plan for ₹{budgetLimit.toLocaleString()} ceiling
+                Here's what you can change without spending more than ₹{budgetLimit.toLocaleString()}
               </h2>
               <p style={{ fontSize: 15, color: "var(--color-ink-600)", marginTop: 6, maxWidth: 640 }}>
-                Every intervention is indexed by installation effort, lease safety, and local street pricing. Slide your budget cap to configure which interventions to execute first.
+                You don't need to do everything at once. In fact, four of the biggest fixes don't cost a single rupee. Set your budget limit below and pick what feels right for you today.
               </p>
             </div>
 
-            {/* Export brief button - Functional, Zero AI Gimmicks */}
+            {/* Export brief button */}
             {onExportBrief && (
               <button
                 onClick={onExportBrief}
@@ -91,7 +91,7 @@ export default function BudgetPlanner({ onExportBrief }) {
                 style={{ fontSize: 13, gap: 6 }}
               >
                 <FileText size={14} />
-                <span>Export Cost Schedule</span>
+                <span>Save this checklist</span>
               </button>
             )}
           </div>
@@ -130,7 +130,7 @@ export default function BudgetPlanner({ onExportBrief }) {
                 marginBottom: 12
               }}
             >
-              EXPENDITURE CEILING
+              YOUR BUDGET LIMIT
             </span>
 
             {/* Big readable budget number */}
@@ -147,7 +147,7 @@ export default function BudgetPlanner({ onExportBrief }) {
                 ₹{budgetLimit.toLocaleString()}
               </span>
               <span style={{ fontSize: 13, color: "var(--color-ink-500)", fontFamily: "var(--font-mono)" }}>
-                MAX CAP
+                LIMIT
               </span>
             </div>
 
@@ -172,9 +172,9 @@ export default function BudgetPlanner({ onExportBrief }) {
                   marginTop: 8
                 }}
               >
-                <span>₹0 (Pure Hacks)</span>
+                <span>₹0 (Free tweaks)</span>
                 <span>₹2,500</span>
-                <span>₹5,000 (Complete Revival)</span>
+                <span>₹5,000 (Full room refresh)</span>
               </div>
             </div>
 
@@ -189,7 +189,7 @@ export default function BudgetPlanner({ onExportBrief }) {
               }}
             >
               <div style={{ display: "flex", justifyContent: "space-between", fontSize: 13 }}>
-                <span style={{ color: "var(--color-ink-600)" }}>Selected items ({selectedItems.length}):</span>
+                <span style={{ color: "var(--color-ink-600)" }}>Things you've picked ({selectedItems.length}):</span>
                 <strong style={{ fontFamily: "var(--font-mono)", color: "var(--color-ink-900)" }}>
                   ₹{totalCost.toLocaleString()}
                 </strong>
@@ -217,20 +217,20 @@ export default function BudgetPlanner({ onExportBrief }) {
                       color: isOverBudget ? "var(--color-terracotta-dark)" : "var(--color-sage-dark)"
                     }}
                   >
-                    {isOverBudget ? "OVER BUDGET BY ₹" + Math.abs(remaining).toLocaleString() : "REMAINING IN POCKET: ₹" + remaining.toLocaleString()}
+                    {isOverBudget ? "YOU'RE ₹" + Math.abs(remaining).toLocaleString() + " OVER BUDGET" : "₹" + remaining.toLocaleString() + " LEFT OVER IN YOUR POCKET"}
                   </strong>
                 </div>
 
                 <p style={{ fontSize: 11, color: "var(--color-ink-700)", lineHeight: 1.4 }}>
                   {isOverBudget
-                    ? "Uncheck one purchase to stay comfortably under your ceiling."
-                    : "No guilt. Every single rupee left over stays safe in your savings account."}
+                    ? "Uncheck an item or two to keep your spending comfortable."
+                    : "No pressure. Keep whatever you don't spend for chai, books, or weekend plans."}
                 </p>
               </div>
 
               {/* Free items reassuring reminder */}
               <div style={{ fontSize: 11, color: "var(--color-ink-500)", fontStyle: "italic", marginTop: 4 }}>
-                * 4 of the most impactful transformation steps cost exactly ₹0.
+                * 4 of the most impactful upgrades in this list cost exactly ₹0.
               </div>
             </div>
           </div>
@@ -251,28 +251,28 @@ export default function BudgetPlanner({ onExportBrief }) {
                 className={`btn ${activeCategory === "all" ? "btn-primary" : "btn-secondary"}`}
                 style={{ fontSize: 12, padding: "6px 14px" }}
               >
-                All Recommendations ({CHECKLIST_ITEMS.length})
+                All ideas ({CHECKLIST_ITEMS.length})
               </button>
               <button
                 onClick={() => setActiveCategory("free")}
                 className={`btn ${activeCategory === "free" ? "btn-primary" : "btn-secondary"}`}
                 style={{ fontSize: 12, padding: "6px 14px" }}
               >
-                ₹0 Free Fixes (4)
+                ₹0 Free fixes (4)
               </button>
               <button
                 onClick={() => setActiveCategory("diy")}
                 className={`btn ${activeCategory === "diy" ? "btn-primary" : "btn-secondary"}`}
                 style={{ fontSize: 12, padding: "6px 14px" }}
               >
-                DIY Low-Cost (4)
+                Quick DIY projects (4)
               </button>
               <button
                 onClick={() => setActiveCategory("buy")}
                 className={`btn ${activeCategory === "buy" ? "btn-primary" : "btn-secondary"}`}
                 style={{ fontSize: 12, padding: "6px 14px" }}
               >
-                Renter Purchases (5)
+                Things worth buying (5)
               </button>
             </div>
 
@@ -331,7 +331,7 @@ export default function BudgetPlanner({ onExportBrief }) {
 
                         {item.category === "free" && (
                           <span className="badge-arch badge-sage">
-                            ₹0 FREE HACK
+                            ₹0 FREE FIX
                           </span>
                         )}
                         {item.category === "diy" && (
@@ -341,7 +341,7 @@ export default function BudgetPlanner({ onExportBrief }) {
                         )}
                         {item.category === "buy" && (
                           <span className="badge-arch">
-                            RENTER ASSET
+                            WORTH BUYING
                           </span>
                         )}
                       </div>
@@ -358,7 +358,7 @@ export default function BudgetPlanner({ onExportBrief }) {
                         <span>•</span>
                         <span>{item.difficulty}</span>
                         <span>•</span>
-                        <span style={{ color: "var(--color-sage-dark)" }}>Zero-damage certified</span>
+                        <span style={{ color: "var(--color-sage-dark)" }}>Zero wall damage</span>
                       </div>
                     </div>
 

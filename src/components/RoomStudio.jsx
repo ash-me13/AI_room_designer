@@ -42,12 +42,12 @@ export default function RoomStudio() {
         setTimeout(() => {
           setIsAnalyzingCustom(false);
           setCustomRoomNotes({
-            dimensions: "Estimated: 3.4m × 3.0m (~110 sq.ft)",
-            detectedLight: "Harsh direct single point light detected",
+            dimensions: "Looks like about 100 to 115 sq.ft",
+            detectedLight: "Single overhead light casting cold shadows",
             recommendations: [
-              "Move loose desk items into a unified tray to free up work surface.",
-              "Introduce a 2700K warm plug-in clamp light to kill cold shadows.",
-              "Place a 120cm jute runner along the main foot traffic path."
+              "Clear desk visual clutter by gathering chargers, pens, and keys into one neat shallow tray.",
+              "Add a small 2700K warm clip-on lamp by your bed or desk so you can turn off the cold ceiling light.",
+              "Lay down a simple woven runner between your bed and desk to keep your feet warm on cold floors."
             ]
           });
         }, 800);
@@ -69,9 +69,9 @@ export default function RoomStudio() {
         {/* Section Header */}
         <div style={{ marginBottom: 36 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
-            <span className="badge-arch">INTERACTIVE STUDIO</span>
+            <span className="badge-arch">DESIGN STUDIO</span>
             <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--color-ink-500)" }}>
-              • BELIEVABLE TRANSFORMATIONS
+              • SIMPLE, REALISTIC MAKEOVERS
             </span>
           </div>
 
@@ -96,7 +96,7 @@ export default function RoomStudio() {
                 What kind of room feels like you?
               </h2>
               <p style={{ fontSize: 15, color: "var(--color-ink-600)", marginTop: 6, maxWidth: 640 }}>
-                Select a space archetype or upload a snapshot of your current bedroom. Every design move adheres strictly to lease-safe, zero-damage rules.
+                Pick a room that looks like yours, or upload a quick photo of your actual space. Every single idea here is 100% renter-safe — no drilling, no angry landlord, and no lost deposit.
               </p>
             </div>
 
@@ -214,7 +214,7 @@ export default function RoomStudio() {
                       }}
                     />
                     <span style={{ fontFamily: "var(--font-mono)", fontSize: 12, fontWeight: 700 }}>
-                      YOUR UPLOADED ROOM
+                      YOUR ROOM PHOTO
                     </span>
                   </div>
 
@@ -226,7 +226,7 @@ export default function RoomStudio() {
                     className="btn btn-ghost"
                     style={{ fontSize: 11, padding: "4px 8px" }}
                   >
-                    Reset to Preset
+                    Back to sample rooms
                   </button>
                 </div>
 
@@ -266,7 +266,7 @@ export default function RoomStudio() {
                         }}
                       />
                       <p style={{ fontFamily: "var(--font-mono)", fontSize: 13 }}>
-                        Inspecting room light angles &amp; layout proportions...
+                        Looking at your room's lighting and layout...
                       </p>
                     </div>
                   )}
@@ -275,7 +275,7 @@ export default function RoomStudio() {
                 {customRoomNotes && (
                   <div style={{ padding: "20px", backgroundColor: "var(--color-ivory-100)" }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-                      <span className="badge-arch badge-sage">STUDIO ASSESSMENT</span>
+                      <span className="badge-arch badge-sage">DESIGNER'S TAKE</span>
                       <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--color-ink-600)" }}>
                         {customRoomNotes.dimensions}
                       </span>
@@ -301,7 +301,7 @@ export default function RoomStudio() {
               />
             )}
 
-            {/* Room Dimensions & Architectural Specs Strip */}
+            {/* Room Dimensions & Specs Strip */}
             <div
               style={{
                 marginTop: 18,
@@ -325,7 +325,7 @@ export default function RoomStudio() {
                     marginBottom: 3
                   }}
                 >
-                  Room Dimensions
+                  Room size
                 </span>
                 <span style={{ fontFamily: "var(--font-mono)", fontSize: 13, fontWeight: 700, color: "var(--color-ink-900)" }}>
                   {currentPreset.dimensions}
@@ -343,7 +343,7 @@ export default function RoomStudio() {
                     marginBottom: 3
                   }}
                 >
-                  Key Architectural Shift
+                  The biggest quick fix
                 </span>
                 <span style={{ fontSize: 13, color: "var(--color-ink-800)" }}>
                   {currentStyle.keyChanges[0]}
@@ -361,7 +361,7 @@ export default function RoomStudio() {
                     marginBottom: 3
                   }}
                 >
-                  Lease Safety Index
+                  Deposit safety
                 </span>
                 <span style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 13, fontWeight: 600, color: "var(--color-sage-dark)" }}>
                   <ShieldCheck size={15} />
@@ -384,9 +384,9 @@ export default function RoomStudio() {
               }}
             >
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
-                <span className="badge-arch">SELECT STYLE MOOD</span>
+                <span className="badge-arch">CHOOSE A VIBE</span>
                 <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--color-ink-500)" }}>
-                  3 CURATED PALETTES
+                  3 EASY LOOKS
                 </span>
               </div>
 
@@ -458,7 +458,7 @@ export default function RoomStudio() {
                     marginBottom: 4
                   }}
                 >
-                  Palette Breakdown
+                  Why this look works in small spaces
                 </span>
                 <p style={{ fontSize: 13, color: "var(--color-ink-800)", lineHeight: 1.5 }}>
                   {currentStyle.description}
@@ -486,11 +486,11 @@ export default function RoomStudio() {
                     color: "var(--color-ink-900)"
                   }}
                 >
-                  Renter Realities &amp; Lease Rules
+                  Your rental house rules
                 </h3>
               </div>
               <p style={{ fontSize: 12, color: "var(--color-ink-600)", marginBottom: 14 }}>
-                Toggle your apartment constraints. RoomRevive will automatically calibrate recommendations:
+                Check off whatever your landlord or hostel restricts, and we'll tailor every recommendation:
               </p>
 
               <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
@@ -511,9 +511,9 @@ export default function RoomStudio() {
                     style={{ marginTop: 3, accentColor: "var(--color-ink-900)" }}
                   />
                   <div>
-                    <strong>No wall drilling</strong>
+                    <strong>No drilling or nail holes</strong>
                     <p style={{ fontSize: 11, color: "var(--color-ink-500)" }}>
-                      Command strips, tension rods, and lean-against shelves only.
+                      We'll stick to Command hooks, tension rods, and lean-against shelves only.
                     </p>
                   </div>
                 </label>
@@ -535,9 +535,9 @@ export default function RoomStudio() {
                     style={{ marginTop: 3, accentColor: "var(--color-ink-900)" }}
                   />
                   <div>
-                    <strong>Landlord off-white walls</strong>
+                    <strong>Can't repaint plain off-white walls</strong>
                     <p style={{ fontSize: 11, color: "var(--color-ink-500)" }}>
-                      Warm up neutral walls with textured runners, not forbidden paint.
+                      We'll bring in warmth with textured blankets, fabric runners, and soft lighting instead.
                     </p>
                   </div>
                 </label>
@@ -559,9 +559,9 @@ export default function RoomStudio() {
                     style={{ marginTop: 3, accentColor: "var(--color-ink-900)" }}
                   />
                   <div>
-                    <strong>Fixed heavy furniture</strong>
+                    <strong>Stuck with heavy immovable furniture</strong>
                     <p style={{ fontSize: 11, color: "var(--color-ink-500)" }}>
-                      Work with existing hostel beds &amp; wardrobes via textile draping.
+                      We'll soften metal beds and bulky wardrobes with cozy throws, cushions, and neat bins.
                     </p>
                   </div>
                 </label>
@@ -583,9 +583,9 @@ export default function RoomStudio() {
                     style={{ marginTop: 3, accentColor: "var(--color-ink-900)" }}
                   />
                   <div>
-                    <strong>Clinical ceiling tube light</strong>
+                    <strong>Harsh white fluorescent ceiling light</strong>
                     <p style={{ fontSize: 11, color: "var(--color-ink-500)" }}>
-                      Kill the harsh glare with 2700K ambient task paper lighting.
+                      We'll add gentle plug-in lamps and paper lanterns so you rarely have to flip that harsh switch.
                     </p>
                   </div>
                 </label>
