@@ -1,0 +1,358 @@
+/* ==========================================================================
+   RoomRevive AI — Studio Design System
+   Human-Centered, Editorial Interior Architecture & Renter Styling
+   ========================================================================== */
+
+:root {
+  /* Warm Natural Palette */
+  --color-ivory-50: #FAF8F5;
+  --color-ivory-100: #F4EFE6;
+  --color-ivory-200: #EBE4D6;
+  --color-ivory-300: #DDD2BF;
+  --color-ivory-400: #CEC1AB;
+  
+  --color-ink-900: #181B19;
+  --color-ink-800: #252B27;
+  --color-ink-700: #38403B;
+  --color-ink-600: #546059;
+  --color-ink-500: #717E76;
+  --color-ink-400: #939F98;
+  --color-ink-200: #D0D7D2;
+  --color-ink-100: #EAEFEA;
+
+  --color-terracotta: #C8664B;
+  --color-terracotta-dark: #9E452E;
+  --color-terracotta-light: #F4DFD8;
+  --color-terracotta-bg: #FBF2EE;
+
+  --color-sage: #6B7F6D;
+  --color-sage-dark: #455546;
+  --color-sage-light: #DCE5DD;
+  --color-sage-bg: #F1F5F2;
+
+  --color-sand: #D5C7B5;
+  --color-linen: #EFE9DF;
+  --color-brass: #B68D40;
+  --color-brass-light: #F7EFCF;
+
+  /* Typography */
+  --font-editorial: 'Fraunces', Georgia, serif;
+  --font-ui: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'Space Mono', Menlo, Consolas, monospace;
+
+  /* Architectural Radii */
+  --radius-xs: 3px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+
+  /* Elevation - Soft natural diffuse shadows */
+  --shadow-subtle: 0 1px 3px rgba(24, 27, 25, 0.05), 0 4px 12px rgba(24, 27, 25, 0.03);
+  --shadow-editorial: 0 4px 16px rgba(24, 27, 25, 0.07), 0 12px 32px rgba(24, 27, 25, 0.04);
+  --shadow-lifted: 0 12px 32px rgba(24, 27, 25, 0.09), 0 24px 64px rgba(24, 27, 25, 0.05);
+
+  /* Layout Spacing */
+  --container-max: 1260px;
+  --header-height: 72px;
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-ui);
+  background-color: var(--color-ivory-50);
+  color: var(--color-ink-800);
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--color-ivory-50);
+  overflow-x: hidden;
+}
+
+/* Texture overlay for human warmth */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: radial-gradient(var(--color-ink-900) 1px, transparent 0);
+  background-size: 16px 16px;
+  z-index: 999;
+}
+
+/* Typography styles */
+h1, h2, h3, h4, .font-editorial {
+  font-family: var(--font-editorial);
+  font-weight: 400;
+  color: var(--color-ink-900);
+  line-height: 1.2;
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+  letter-spacing: -0.03em;
+}
+
+/* Rulers and Architectural Measurement Ticks */
+.ruler-border-b {
+  position: relative;
+  border-bottom: 1px solid var(--color-ivory-300);
+}
+
+.ruler-border-b::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--color-ivory-400) 0,
+    var(--color-ivory-400) 1px,
+    transparent 1px,
+    transparent 20px
+  );
+  opacity: 0.5;
+}
+
+.ruler-border-t {
+  position: relative;
+  border-top: 1px solid var(--color-ivory-300);
+}
+
+/* Architectural badge tag */
+.badge-arch {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 4px 10px;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--color-ivory-300);
+  background: var(--color-ivory-100);
+  color: var(--color-ink-700);
+}
+
+.badge-terracotta {
+  background: var(--color-terracotta-bg);
+  border-color: rgba(200, 102, 75, 0.25);
+  color: var(--color-terracotta-dark);
+}
+
+.badge-sage {
+  background: var(--color-sage-bg);
+  border-color: rgba(107, 127, 109, 0.25);
+  color: var(--color-sage-dark);
+}
+
+/* Buttons with tactile studio feel */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 22px;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid transparent;
+  text-decoration: none;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background-color: var(--color-ink-900);
+  color: var(--color-ivory-50);
+  border-color: var(--color-ink-900);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-ink-700);
+  border-color: var(--color-ink-700);
+  box-shadow: var(--shadow-subtle);
+}
+
+.btn-terracotta {
+  background-color: var(--color-terracotta);
+  color: #fff;
+  border-color: var(--color-terracotta);
+}
+
+.btn-terracotta:hover {
+  background-color: var(--color-terracotta-dark);
+  border-color: var(--color-terracotta-dark);
+  box-shadow: 0 4px 12px rgba(200, 102, 75, 0.2);
+}
+
+.btn-secondary {
+  background-color: var(--color-ivory-100);
+  color: var(--color-ink-800);
+  border-color: var(--color-ivory-300);
+}
+
+.btn-secondary:hover {
+  background-color: #fff;
+  border-color: var(--color-ink-400);
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: var(--color-ink-700);
+}
+
+.btn-ghost:hover {
+  background-color: var(--color-ivory-200);
+  color: var(--color-ink-900);
+}
+
+/* Custom Range Input */
+input[type="range"].studio-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  background: var(--color-ivory-300);
+  border-radius: 3px;
+  outline: none;
+}
+
+input[type="range"].studio-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-ink-900);
+  border: 2px solid var(--color-ivory-50);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+input[type="range"].studio-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+/* Subtle architectural crosshair mark */
+.crosshair-corner {
+  position: relative;
+}
+
+.crosshair-corner::before {
+  content: "+";
+  position: absolute;
+  top: -9px;
+  left: -6px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--color-ivory-400);
+  pointer-events: none;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-ivory-100);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-ivory-300);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-ink-400);
+}
+
+/* Animation utilities */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pulseSubtle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.05); }
+}
+
+.pulse-subtle {
+  animation: pulseSubtle 3s ease-in-out infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive Media Queries */
+@media (max-width: 960px) {
+  .hero-grid,
+  .studio-workspace-grid,
+  .swatches-layout-grid,
+  .budget-planner-grid,
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+
+  .side-by-side-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+/* Clean Editorial Print Styles for Studio Spec Sheet */
+@media print {
+  body {
+    background: #FFF !important;
+    color: #000 !important;
+  }
+
+  header, footer, .no-print, #studio-section, #materials-section, #budget-section, #handbook-section {
+    display: none !important;
+  }
+
+  .spec-sheet-modal {
+    box-shadow: none !important;
+    border: none !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+}
