@@ -1,9 +1,22 @@
 import React from "react";
 import BrandLogo from "./BrandLogo";
 import { Printer, X, ShieldCheck } from "lucide-react";
+import { ROOM_PRESETS, CHECKLIST_ITEMS } from "../data/roomData";
 
-export default function ExportSpecModal({ isOpen, onClose }) {
+export default function ExportSpecModal({
+  isOpen,
+  onClose,
+  selectedPresetId = "student-hostel",
+  selectedStyleId = "japandi",
+  selectedItems = ["free-1", "free-2", "diy-1", "buy-1"],
+  budgetLimit = 2500
+}) {
   if (!isOpen) return null;
+
+  const currentPreset = ROOM_PRESETS.find((p) => p.id === selectedPresetId) || ROOM_PRESETS[0];
+  const currentStyle = currentPreset.styles[selectedStyleId] || currentPreset.styles["japandi"];
+  const chosenChecklistItems = CHECKLIST_ITEMS.filter((item) => selectedItems.includes(item.id));
+  const totalCost = chosenChecklistItems.reduce((acc, it) => acc + it.cost, 0);
 
   const handlePrint = () => {
     window.print();
@@ -91,7 +104,7 @@ export default function ExportSpecModal({ isOpen, onClose }) {
 
           <div style={{ textAlign: "right", fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--color-ink-600)" }}>
             <div>Date: October 2026</div>
-            <div>Room size: ~96 sq.ft</div>
+            <div>Room size: {currentPreset.dimensions}</div>
             <div style={{ color: "var(--color-sage-dark)", fontWeight: 700 }}>Wall damage: Exactly 0%</div>
           </div>
         </div>
@@ -130,69 +143,72 @@ export default function ExportSpecModal({ isOpen, onClose }) {
               <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "var(--color-ink-500)", textTransform: "uppercase" }}>
                 Chosen Style
               </span>
-              <p style={{ fontWeight: 600, color: "var(--color-ink-900)" }}>Warm Minimalist &amp; Japandi</p>
+              <p style={{ fontWeight: 600, color: "var(--color-ink-900)" }}>{currentStyle.name}</p>
             </div>
             <div>
               <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "var(--color-ink-500)", textTransform: "uppercase" }}>
-                Lighting Swaps
+                Color Palette
               </span>
-              <p style={{ fontWeight: 600, color: "var(--color-ink-900)" }}>2700K Warm Paper Globe</p>
+              <p style={{ fontWeight: 600, color: "var(--color-ink-900)" }}>{currentStyle.paletteName}</p>
             </div>
             <div>
               <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "var(--color-ink-500)", textTransform: "uppercase" }}>
-                Floor Layer
+                Total Cost Planned
               </span>
-              <p style={{ fontWeight: 600, color: "var(--color-ink-900)" }}>Braided Jute Runner (120×180cm)</p>
+              <p style={{ fontWeight: 600, color: "var(--color-sage-dark)" }}>
+                ₹{totalCost.toLocaleString()} (under ₹{budgetLimit.toLocaleString()} limit)
+              </p>
             </div>
           </div>
         </div>
 
         {/* Priority Execution Checklist */}
         <div style={{ marginBottom: 24 }}>
-          <h4
-            style={{
-              fontFamily: "var(--font-editorial)",
-              fontSize: 16,
-              fontWeight: 600,
-              color: "var(--color-ink-900)",
-              marginBottom: 12
-            }}
-          >
-            Your checklist &amp; estimated costs
-          </h4>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 12 }}>
+            <h4
+              style={{
+                fontFamily: "var(--font-editorial)",
+                fontSize: 16,
+                fontWeight: 600,
+                color: "var(--color-ink-900)"
+              }}
+            >
+              Your selected items ({chosenChecklistItems.length})
+            </h4>
+            <span style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "var(--color-ink-600)" }}>
+              Total: <strong>₹{totalCost.toLocaleString()}</strong>
+            </span>
+          </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 8, fontSize: 13 }}>
-            <div style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: "8px 0", borderBottom: "1px solid var(--color-ivory-200)" }}>
-              <span style={{ fontFamily: "var(--font-mono)", color: "var(--color-sage-dark)", fontWeight: 700 }}>[01]</span>
-              <div style={{ flex: 1 }}>
-                <strong>Tuck wire snakes into desk binder clips</strong> — 10 min zero-cost clean-up.
+            {chosenChecklistItems.map((item, index) => (
+              <div
+                key={item.id}
+                style={{
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: 10,
+                  padding: "8px 0",
+                  borderBottom: "1px solid var(--color-ivory-200)"
+                }}
+              >
+                <span style={{ fontFamily: "var(--font-mono)", color: "var(--color-sage-dark)", fontWeight: 700 }}>
+                  [0{index + 1}]
+                </span>
+                <div style={{ flex: 1 }}>
+                  <strong>{item.title}</strong> — {item.description}
+                </div>
+                <span
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    color: item.cost === 0 ? "var(--color-sage-dark)" : "var(--color-ink-900)",
+                    fontWeight: 600
+                  }}
+                >
+                  {item.cost === 0 ? "₹0" : `₹${item.cost}`}
+                </span>
               </div>
-              <span style={{ fontFamily: "var(--font-mono)", color: "var(--color-sage-dark)" }}>₹0</span>
-            </div>
-
-            <div style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: "8px 0", borderBottom: "1px solid var(--color-ivory-200)" }}>
-              <span style={{ fontFamily: "var(--font-mono)", color: "var(--color-sage-dark)", fontWeight: 700 }}>[02]</span>
-              <div style={{ flex: 1 }}>
-                <strong>Rice paper diffuser pendant over bare bulb</strong> — 2700K ambient warmth.
-              </div>
-              <span style={{ fontFamily: "var(--font-mono)" }}>₹320</span>
-            </div>
-
-            <div style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: "8px 0", borderBottom: "1px solid var(--color-ivory-200)" }}>
-              <span style={{ fontFamily: "var(--font-mono)", color: "var(--color-sage-dark)", fontWeight: 700 }}>[03]</span>
-              <div style={{ flex: 1 }}>
-                <strong>Command picture hanging strips (4-pack)</strong> — holds tight without peeling paint.
-              </div>
-              <span style={{ fontFamily: "var(--font-mono)" }}>₹380</span>
-            </div>
-
-            <div style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: "8px 0", borderBottom: "1px solid var(--color-ivory-200)" }}>
-              <span style={{ fontFamily: "var(--font-mono)", color: "var(--color-sage-dark)", fontWeight: 700 }}>[04]</span>
-              <div style={{ flex: 1 }}>
-                <strong>Braided natural jute floor runner (60×120cm)</strong> — cushions cold tile floors.
-              </div>
-              <span style={{ fontFamily: "var(--font-mono)" }}>₹750</span>
-            </div>
+            ))}
           </div>
         </div>
 

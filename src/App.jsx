@@ -1,16 +1,28 @@
 import React, { useState } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
+import RoomSummaryDock from "./components/RoomSummaryDock";
 import RoomStudio from "./components/RoomStudio";
 import MaterialArchive from "./components/MaterialArchive";
 import BudgetPlanner from "./components/BudgetPlanner";
 import RentersHandbook from "./components/RentersHandbook";
 import Footer from "./components/Footer";
 import ExportSpecModal from "./components/ExportSpecModal";
+import { CHECKLIST_ITEMS } from "./data/roomData";
 
 export default function App() {
   const [isExportOpen, setIsExportOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("studio");
+
+  // Shared user state so style & budget are understood at a glance
+  const [selectedPresetId, setSelectedPresetId] = useState("student-hostel");
+  const [selectedStyleId, setSelectedStyleId] = useState("japandi");
+  const [budgetLimit, setBudgetLimit] = useState(2500);
+  const [selectedItems, setSelectedItems] = useState(() => {
+    return CHECKLIST_ITEMS.filter(
+      (item) => item.category === "free" || item.id === "diy-1" || item.id === "buy-1"
+    ).map((item) => item.id);
+  });
 
   return (
     <div className="min-h-screen">
@@ -34,14 +46,33 @@ export default function App() {
           }}
         />
 
+        {/* At-A-Glance Room & Budget Summary Strip */}
+        <RoomSummaryDock
+          selectedPresetId={selectedPresetId}
+          selectedStyleId={selectedStyleId}
+          budgetLimit={budgetLimit}
+          selectedItems={selectedItems}
+        />
+
         {/* Central Interactive Design Studio */}
-        <RoomStudio />
+        <RoomStudio
+          selectedPresetId={selectedPresetId}
+          setSelectedPresetId={setSelectedPresetId}
+          selectedStyleId={selectedStyleId}
+          setSelectedStyleId={setSelectedStyleId}
+        />
 
         {/* Tactile Material Archive & Texture Explorer */}
         <MaterialArchive />
 
         {/* Actionable Budget Planner & Checklist */}
-        <BudgetPlanner onExportBrief={() => setIsExportOpen(true)} />
+        <BudgetPlanner
+          onExportBrief={() => setIsExportOpen(true)}
+          budgetLimit={budgetLimit}
+          setBudgetLimit={setBudgetLimit}
+          selectedItems={selectedItems}
+          setSelectedItems={setSelectedItems}
+        />
 
         {/* The Renter's Handbook: Human-Crafted Principles */}
         <RentersHandbook />
@@ -54,6 +85,10 @@ export default function App() {
       <ExportSpecModal
         isOpen={isExportOpen}
         onClose={() => setIsExportOpen(false)}
+        selectedPresetId={selectedPresetId}
+        selectedStyleId={selectedStyleId}
+        selectedItems={selectedItems}
+        budgetLimit={budgetLimit}
       />
     </div>
   );

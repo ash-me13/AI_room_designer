@@ -447,62 +447,119 @@ export default function BeforeAfterViewer({
       )}
 
       {/* Selected Annotation Detail Drawer */}
+      {/* Selected Annotation Detail Drawer (Helpful, concrete designer advice) */}
       {activeAnnotation && (
         <div
           className="animate-fade-in"
           style={{
-            padding: "16px 20px",
+            padding: "20px 24px",
             backgroundColor: "var(--color-ivory-100)",
-            borderTop: "1px solid var(--color-ivory-300)",
-            display: "flex",
-            alignItems: "flex-start",
-            justifyContent: "space-between",
-            gap: 16
+            borderTop: "1px solid var(--color-ivory-300)"
           }}
         >
-          <div style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
-            <div
-              style={{
-                width: 28,
-                height: 28,
-                borderRadius: "50%",
-                backgroundColor: "var(--color-ink-900)",
-                color: "#FFF",
-                fontFamily: "var(--font-mono)",
-                fontSize: 12,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                flexShrink: 0
-              }}
-            >
-              0{activeAnnotation.id}
-            </div>
-            <div>
+          <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 16, marginBottom: 12 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div
+                style={{
+                  width: 26,
+                  height: 26,
+                  borderRadius: "50%",
+                  backgroundColor: "var(--color-ink-900)",
+                  color: "#FFF",
+                  fontFamily: "var(--font-mono)",
+                  fontSize: 11,
+                  fontWeight: 700,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexShrink: 0
+                }}
+              >
+                0{activeAnnotation.id}
+              </div>
               <h4
                 style={{
                   fontFamily: "var(--font-editorial)",
-                  fontSize: 16,
+                  fontSize: 18,
                   fontWeight: 600,
-                  color: "var(--color-ink-900)",
-                  marginBottom: 3
+                  color: "var(--color-ink-900)"
                 }}
               >
                 {activeAnnotation.title}
               </h4>
-              <p style={{ fontSize: 13, color: "var(--color-ink-700)", lineHeight: 1.5 }}>
-                {activeAnnotation.detail}
-              </p>
+              <span className="badge-arch badge-sage" style={{ fontSize: 10 }}>
+                100% RENTER SAFE
+              </span>
             </div>
+
+            <button
+              onClick={() => onSelectAnnotation(null)}
+              className="btn btn-ghost"
+              style={{ fontSize: 12, padding: "4px 8px", fontFamily: "var(--font-mono)" }}
+            >
+              Close ✕
+            </button>
           </div>
 
-          <button
-            onClick={() => onSelectAnnotation(null)}
-            className="btn btn-ghost"
-            style={{ fontSize: 11, padding: "4px 8px", fontFamily: "var(--font-mono)" }}
+          <p style={{ fontSize: 14, color: "var(--color-ink-800)", lineHeight: 1.5, marginBottom: 14 }}>
+            {activeAnnotation.detail}
+          </p>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+              gap: 14,
+              backgroundColor: "#FFF",
+              padding: "14px 16px",
+              borderRadius: "var(--radius-xs)",
+              border: "1px solid var(--color-ivory-300)"
+            }}
           >
-            Done ✕
-          </button>
+            {activeAnnotation.whyItHelps && (
+              <div>
+                <span
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 10,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.06em",
+                    color: "var(--color-terracotta)",
+                    fontWeight: 700,
+                    display: "block",
+                    marginBottom: 4
+                  }}
+                >
+                  💡 WHY THIS WORKS IN SMALL ROOMS
+                </span>
+                <p style={{ fontSize: 12, color: "var(--color-ink-700)", lineHeight: 1.5 }}>
+                  {activeAnnotation.whyItHelps}
+                </p>
+              </div>
+            )}
+
+            {activeAnnotation.howToDoIt && (
+              <div>
+                <span
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 10,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.06em",
+                    color: "var(--color-sage-dark)",
+                    fontWeight: 700,
+                    display: "block",
+                    marginBottom: 4
+                  }}
+                >
+                  🛠️ HOW TO DO IT YOURSELF
+                </span>
+                <p style={{ fontSize: 12, color: "var(--color-ink-700)", lineHeight: 1.5 }}>
+                  {activeAnnotation.howToDoIt}
+                </p>
+              </div>
+            )}
+          </div>
         </div>
       )}
 

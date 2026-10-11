@@ -1,24 +1,40 @@
 import React, { useState, useMemo } from "react";
 import { CHECKLIST_ITEMS } from "../data/roomData";
-import { Check, ShieldCheck, Clock, FileText, AlertCircle } from "lucide-react";
+import { Check, ShieldCheck, Clock, FileText, AlertCircle, ChevronDown, ChevronUp, Sparkles, Wrench, ShoppingBag } from "lucide-react";
 
-export default function BudgetPlanner({ onExportBrief }) {
+export default function BudgetPlanner({
+  onExportBrief,
+  budgetLimit: externalBudgetLimit,
+  setBudgetLimit: externalSetBudgetLimit,
+  selectedItems: externalSelectedItems,
+  setSelectedItems: externalSetSelectedItems
+}) {
   // Budget ceiling slider: default ₹2,500
-  const [budgetLimit, setBudgetLimit] = useState(2500);
-  
+  const [internalBudgetLimit, setInternalBudgetLimit] = useState(2500);
+  const budgetLimit = externalBudgetLimit !== undefined ? externalBudgetLimit : internalBudgetLimit;
+  const setBudgetLimit = externalSetBudgetLimit || setInternalBudgetLimit;
+
   // Selected items initialized with all free items + first 2 purchases
-  const [selectedItems, setSelectedItems] = useState(() => {
+  const [internalSelectedItems, setInternalSelectedItems] = useState(() => {
     return CHECKLIST_ITEMS.filter(
       (item) => item.category === "free" || item.id === "diy-1" || item.id === "buy-1"
     ).map((item) => item.id);
   });
+  const selectedItems = externalSelectedItems !== undefined ? externalSelectedItems : internalSelectedItems;
+  const setSelectedItems = externalSetSelectedItems || setInternalSelectedItems;
 
   const [activeCategory, setActiveCategory] = useState("all"); // 'all' | 'free' | 'diy' | 'buy'
+  const [expandedItemId, setExpandedItemId] = useState(null);
 
   const toggleItem = (id) => {
     setSelectedItems((prev) =>
       prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
     );
+  };
+
+  const toggleExpand = (id, e) => {
+    e.stopPropagation();
+    setExpandedItemId((prev) => (prev === id ? null : id));
   };
 
   // Calculations
@@ -107,7 +123,7 @@ export default function BudgetPlanner({ onExportBrief }) {
           }}
           className="budget-planner-grid"
         >
-          {/* Left Column: Architectural Ledger Summary Plate */}
+          {/* Left Column: Ledger Summary Plate */}
           <div
             style={{
               backgroundColor: "#FFF",
@@ -198,13 +214,13 @@ export default function BudgetPlanner({ onExportBrief }) {
               {/* Remaining balance notice with reassuring tone */}
               <div
                 style={{
-                  padding: "12px 14px",
+                  padding: "14px 16px",
                   borderRadius: "var(--radius-xs)",
                   backgroundColor: isOverBudget ? "var(--color-terracotta-bg)" : "var(--color-sage-bg)",
                   border: `1px solid ${isOverBudget ? "rgba(200, 102, 75, 0.3)" : "rgba(107, 127, 109, 0.3)"}`
                 }}
               >
-                <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 6 }}>
                   {isOverBudget ? (
                     <AlertCircle size={15} color="var(--color-terracotta)" />
                   ) : (
@@ -217,14 +233,20 @@ export default function BudgetPlanner({ onExportBrief }) {
                       color: isOverBudget ? "var(--color-terracotta-dark)" : "var(--color-sage-dark)"
                     }}
                   >
-                    {isOverBudget ? "YOU'RE ₹" + Math.abs(remaining).toLocaleString() + " OVER BUDGET" : "₹" + remaining.toLocaleString() + " LEFT OVER IN YOUR POCKET"}
+                    {isOverBudget
+                      ? `₹${Math.abs(remaining).toLocaleString()} OVER YOUR PLANNED LIMIT`
+                      : remaining === 0
+                      ? "SPOT-ON BUDGET (₹0 LEFT OVER)"
+                      : `₹${remaining.toLocaleString()} LEFT OVER IN YOUR POCKET`}
                   </strong>
                 </div>
 
-                <p style={{ fontSize: 11, color: "var(--color-ink-700)", lineHeight: 1.4 }}>
+                <p style={{ fontSize: 12, color: "var(--color-ink-700)", lineHeight: 1.45 }}>
                   {isOverBudget
-                    ? "Uncheck an item or two to keep your spending comfortable."
-                    : "No pressure. Keep whatever you don't spend for chai, books, or weekend plans."}
+                    ? "No worries at all! Just uncheck an item or two to keep your spending comfortable, or bookmark them for next month."
+                    : remaining === 0
+                    ? "Every single rupee is accounted for. You're getting the best value without spending a paisa more than intended."
+                    : "Great job! Keep the extra money for chai, books, weekend plans, or groceries."}
                 </p>
               </div>
 
@@ -237,13 +259,45 @@ export default function BudgetPlanner({ onExportBrief }) {
 
           {/* Right Column: Interactive Action Checklist */}
           <div>
+            {/* Spotlight Banner for Renters on ₹0 Budget */}
+            <div
+              style={{
+                backgroundColor: "var(--color-ivory-50)",
+                border: "1px solid var(--color-ivory-300)",
+                borderRadius: "var(--radius-sm)",
+                padding: "14px 18px",
+                marginBottom: 16,
+                display: "flex",
+                alignItems: "center",
+                gap: 12
+              }}
+            >
+              <div
+                style={{
+                  width: 28,
+                  height: 28,
+                  borderRadius: "50%",
+                  backgroundColor: "var(--color-sage-bg)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexShrink: 0
+                }}
+              >
+                <Sparkles size={14} color="var(--color-sage-dark)" />
+              </div>
+              <p style={{ fontSize: 12, color: "var(--color-ink-700)", lineHeight: 1.4, margin: 0 }}>
+                <strong style={{ color: "var(--color-ink-900)" }}>Starting with ₹0?</strong> The 4 free fixes below take under 30 minutes total and make an immediate visual difference before you spend a single rupee.
+              </p>
+            </div>
+
             {/* Category filter tabs */}
             <div
               style={{
                 display: "flex",
                 flexWrap: "wrap",
                 gap: 6,
-                marginBottom: 20
+                marginBottom: 16
               }}
             >
               <button
@@ -280,6 +334,8 @@ export default function BudgetPlanner({ onExportBrief }) {
             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
               {filteredItems.map((item) => {
                 const isChecked = selectedItems.includes(item.id);
+                const isExpanded = expandedItemId === item.id;
+
                 return (
                   <div
                     key={item.id}
@@ -290,91 +346,155 @@ export default function BudgetPlanner({ onExportBrief }) {
                       border: isChecked ? "1.5px solid var(--color-ink-900)" : "1px solid var(--color-ivory-300)",
                       padding: "16px 20px",
                       cursor: "pointer",
-                      transition: "all 0.15s ease",
-                      display: "grid",
-                      gridTemplateColumns: "24px 1fr auto",
-                      gap: 16,
-                      alignItems: "start"
+                      transition: "all 0.15s ease"
                     }}
                   >
-                    {/* Checkbox */}
                     <div
                       style={{
-                        width: 22,
-                        height: 22,
-                        borderRadius: 4,
-                        border: isChecked ? "2px solid var(--color-ink-900)" : "1.5px solid var(--color-ivory-400)",
-                        backgroundColor: isChecked ? "var(--color-ink-900)" : "transparent",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        color: "#FFF",
-                        marginTop: 2
+                        display: "grid",
+                        gridTemplateColumns: "24px 1fr auto",
+                        gap: 16,
+                        alignItems: "start"
                       }}
                     >
-                      {isChecked && <Check size={14} strokeWidth={3} />}
-                    </div>
-
-                    {/* Content */}
-                    <div>
-                      <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 8, marginBottom: 4 }}>
-                        <h4
-                          style={{
-                            fontFamily: "var(--font-ui)",
-                            fontSize: 15,
-                            fontWeight: 600,
-                            color: "var(--color-ink-900)"
-                          }}
-                        >
-                          {item.title}
-                        </h4>
-
-                        {item.category === "free" && (
-                          <span className="badge-arch badge-sage">
-                            ₹0 FREE FIX
-                          </span>
-                        )}
-                        {item.category === "diy" && (
-                          <span className="badge-arch badge-terracotta">
-                            DIY PROJECT
-                          </span>
-                        )}
-                        {item.category === "buy" && (
-                          <span className="badge-arch">
-                            WORTH BUYING
-                          </span>
-                        )}
-                      </div>
-
-                      <p style={{ fontSize: 13, color: "var(--color-ink-600)", lineHeight: 1.5, marginBottom: 8 }}>
-                        {item.description}
-                      </p>
-
-                      <div style={{ display: "flex", alignItems: "center", gap: 14, fontSize: 11, color: "var(--color-ink-500)", fontFamily: "var(--font-mono)" }}>
-                        <span style={{ display: "flex", alignItems: "center", gap: 4 }}>
-                          <Clock size={11} />
-                          {item.time}
-                        </span>
-                        <span>•</span>
-                        <span>{item.difficulty}</span>
-                        <span>•</span>
-                        <span style={{ color: "var(--color-sage-dark)" }}>Zero wall damage</span>
-                      </div>
-                    </div>
-
-                    {/* Cost tag */}
-                    <div style={{ textAlign: "right", minWidth: 64 }}>
-                      <span
+                      {/* Checkbox */}
+                      <div
                         style={{
-                          fontFamily: "var(--font-mono)",
-                          fontSize: 16,
-                          fontWeight: 700,
-                          color: item.cost === 0 ? "var(--color-sage-dark)" : "var(--color-ink-900)"
+                          width: 22,
+                          height: 22,
+                          borderRadius: 4,
+                          border: isChecked ? "2px solid var(--color-ink-900)" : "1.5px solid var(--color-ivory-400)",
+                          backgroundColor: isChecked ? "var(--color-ink-900)" : "transparent",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#FFF",
+                          marginTop: 2
                         }}
                       >
-                        {item.cost === 0 ? "₹0" : `₹${item.cost}`}
-                      </span>
+                        {isChecked && <Check size={14} strokeWidth={3} />}
+                      </div>
+
+                      {/* Content */}
+                      <div>
+                        <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 8, marginBottom: 4 }}>
+                          <h4
+                            style={{
+                              fontFamily: "var(--font-ui)",
+                              fontSize: 15,
+                              fontWeight: 600,
+                              color: "var(--color-ink-900)"
+                            }}
+                          >
+                            {item.title}
+                          </h4>
+
+                          {item.category === "free" && (
+                            <span className="badge-arch badge-sage" style={{ display: "inline-flex", alignItems: "center", gap: 4 }}>
+                              <Sparkles size={11} />
+                              ₹0 FREE FIX
+                            </span>
+                          )}
+                          {item.category === "diy" && (
+                            <span className="badge-arch badge-terracotta" style={{ display: "inline-flex", alignItems: "center", gap: 4 }}>
+                              <Wrench size={11} />
+                              DIY PROJECT
+                            </span>
+                          )}
+                          {item.category === "buy" && (
+                            <span className="badge-arch" style={{ display: "inline-flex", alignItems: "center", gap: 4 }}>
+                              <ShoppingBag size={11} />
+                              WORTH BUYING
+                            </span>
+                          )}
+                        </div>
+
+                        <p style={{ fontSize: 13, color: "var(--color-ink-600)", lineHeight: 1.5, marginBottom: 8 }}>
+                          {item.description}
+                        </p>
+
+                        <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 14, fontSize: 11, color: "var(--color-ink-500)", fontFamily: "var(--font-mono)" }}>
+                          <span style={{ display: "flex", alignItems: "center", gap: 4 }}>
+                            <Clock size={11} />
+                            {item.time}
+                          </span>
+                          <span>•</span>
+                          <span>{item.difficulty}</span>
+                          <span>•</span>
+                          <span style={{ color: "var(--color-sage-dark)" }}>Zero wall damage</span>
+                          <span>•</span>
+                          <button
+                            onClick={(e) => toggleExpand(item.id, e)}
+                            style={{
+                              background: "none",
+                              border: "none",
+                              color: "var(--color-terracotta)",
+                              fontFamily: "var(--font-mono)",
+                              fontSize: 11,
+                              fontWeight: 600,
+                              cursor: "pointer",
+                              padding: 0,
+                              display: "inline-flex",
+                              alignItems: "center",
+                              gap: 3
+                            }}
+                          >
+                            <span>{isExpanded ? "Hide advice" : "Why & how it works"}</span>
+                            {isExpanded ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Cost tag */}
+                      <div style={{ textAlign: "right", minWidth: 64 }}>
+                        <span
+                          style={{
+                            fontFamily: "var(--font-mono)",
+                            fontSize: 16,
+                            fontWeight: 700,
+                            color: item.cost === 0 ? "var(--color-sage-dark)" : "var(--color-ink-900)"
+                          }}
+                        >
+                          {item.cost === 0 ? "₹0" : `₹${item.cost}`}
+                        </span>
+                      </div>
                     </div>
+
+                    {/* Expandable Practical Advice Accordion */}
+                    {isExpanded && (
+                      <div
+                        className="animate-fade-in"
+                        style={{
+                          marginTop: 14,
+                          paddingTop: 14,
+                          borderTop: "1px dashed var(--color-ivory-300)",
+                          display: "grid",
+                          gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+                          gap: 12
+                        }}
+                      >
+                        {item.whyItHelps && (
+                          <div style={{ backgroundColor: "var(--color-ivory-50)", padding: "10px 14px", borderRadius: "var(--radius-xs)" }}>
+                            <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "var(--color-terracotta)", fontWeight: 700, textTransform: "uppercase", display: "block", marginBottom: 3 }}>
+                              💡 Why it helps in rentals
+                            </span>
+                            <p style={{ fontSize: 12, color: "var(--color-ink-700)", lineHeight: 1.45, margin: 0 }}>
+                              {item.whyItHelps}
+                            </p>
+                          </div>
+                        )}
+                        {item.howToDoIt && (
+                          <div style={{ backgroundColor: "var(--color-ivory-50)", padding: "10px 14px", borderRadius: "var(--radius-xs)" }}>
+                            <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "var(--color-sage-dark)", fontWeight: 700, textTransform: "uppercase", display: "block", marginBottom: 3 }}>
+                              🛠️ Step-by-step how to do it
+                            </span>
+                            <p style={{ fontSize: 12, color: "var(--color-ink-700)", lineHeight: 1.45, margin: 0 }}>
+                              {item.howToDoIt}
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
                 );
               })}
