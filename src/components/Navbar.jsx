@@ -1,6 +1,6 @@
 import React from "react";
 import BrandLogo from "./BrandLogo";
-import { Sliders, Palette, BookOpen, FileText } from "lucide-react";
+import { Sliders, ListChecks, Palette, BookOpen, FileText } from "lucide-react";
 
 export default function Navbar({ onOpenExport }) {
   const scrollTo = (id) => {
@@ -67,6 +67,15 @@ export default function Navbar({ onOpenExport }) {
           >
             <Sliders size={14} strokeWidth={1.8} />
             <span>Makeovers</span>
+          </button>
+
+          <button
+            onClick={() => scrollTo("steps-section")}
+            className="btn btn-ghost"
+            style={{ fontSize: 13, padding: "8px 14px", display: "flex", alignItems: "center", gap: 6 }}
+          >
+            <ListChecks size={14} strokeWidth={1.8} />
+            <span>4-Step Plan</span>
           </button>
 
           <button

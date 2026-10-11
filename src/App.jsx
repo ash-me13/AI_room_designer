@@ -4,6 +4,7 @@ import Hero from "./components/Hero";
 import RoomSummaryDock from "./components/RoomSummaryDock";
 import RoomStudio from "./components/RoomStudio";
 import MaterialArchive from "./components/MaterialArchive";
+import MakeoverSteps from "./components/MakeoverSteps";
 import BudgetPlanner from "./components/BudgetPlanner";
 import RentersHandbook from "./components/RentersHandbook";
 import Footer from "./components/Footer";
@@ -54,7 +55,7 @@ export default function App() {
           selectedItems={selectedItems}
         />
 
-        {/* Central Interactive Design Studio */}
+        {/* Central Interactive Design Studio: Spacious Before-and-After & Horizontal Style Gallery */}
         <RoomStudio
           selectedPresetId={selectedPresetId}
           setSelectedPresetId={setSelectedPresetId}
@@ -62,7 +63,10 @@ export default function App() {
           setSelectedStyleId={setSelectedStyleId}
         />
 
-        {/* Tactile Material Archive & Texture Explorer */}
+        {/* Clear Step-by-Step Form & 4-Step Action Plan */}
+        <MakeoverSteps />
+
+        {/* Asymmetric Image-and-Text Section & Large Photographic Material Archive */}
         <MaterialArchive />
 
         {/* Actionable Budget Planner & Checklist */}
