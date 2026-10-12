@@ -167,6 +167,85 @@ export default function BudgetPlanner({
               </span>
             </div>
 
+            {/* Quick Budget Tier Shortcuts (Grounded in student & renter realities) */}
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 16 }}>
+              <button
+                type="button"
+                onClick={() => {
+                  setBudgetLimit(0);
+                  setActiveCategory("free");
+                }}
+                className="btn-ghost"
+                style={{
+                  padding: "4px 8px",
+                  fontSize: 11,
+                  fontFamily: "var(--font-mono)",
+                  borderRadius: "var(--radius-xs)",
+                  border: budgetLimit === 0 ? "1px solid var(--color-ink-900)" : "1px solid var(--color-ivory-300)",
+                  backgroundColor: budgetLimit === 0 ? "var(--color-ivory-200)" : "#FFF",
+                  color: "var(--color-ink-900)",
+                  cursor: "pointer",
+                  fontWeight: budgetLimit === 0 ? 700 : 500
+                }}
+              >
+                ₹0 Zero Budget
+              </button>
+              <button
+                type="button"
+                onClick={() => setBudgetLimit(500)}
+                className="btn-ghost"
+                style={{
+                  padding: "4px 8px",
+                  fontSize: 11,
+                  fontFamily: "var(--font-mono)",
+                  borderRadius: "var(--radius-xs)",
+                  border: budgetLimit === 500 ? "1px solid var(--color-ink-900)" : "1px solid var(--color-ivory-300)",
+                  backgroundColor: budgetLimit === 500 ? "var(--color-ivory-200)" : "#FFF",
+                  color: "var(--color-ink-900)",
+                  cursor: "pointer",
+                  fontWeight: budgetLimit === 500 ? 700 : 500
+                }}
+              >
+                ₹500 Pocket
+              </button>
+              <button
+                type="button"
+                onClick={() => setBudgetLimit(1500)}
+                className="btn-ghost"
+                style={{
+                  padding: "4px 8px",
+                  fontSize: 11,
+                  fontFamily: "var(--font-mono)",
+                  borderRadius: "var(--radius-xs)",
+                  border: budgetLimit === 1500 ? "1px solid var(--color-ink-900)" : "1px solid var(--color-ivory-300)",
+                  backgroundColor: budgetLimit === 1500 ? "var(--color-ivory-200)" : "#FFF",
+                  color: "var(--color-ink-900)",
+                  cursor: "pointer",
+                  fontWeight: budgetLimit === 1500 ? 700 : 500
+                }}
+              >
+                ₹1,500 Student
+              </button>
+              <button
+                type="button"
+                onClick={() => setBudgetLimit(3000)}
+                className="btn-ghost"
+                style={{
+                  padding: "4px 8px",
+                  fontSize: 11,
+                  fontFamily: "var(--font-mono)",
+                  borderRadius: "var(--radius-xs)",
+                  border: budgetLimit === 3000 ? "1px solid var(--color-ink-900)" : "1px solid var(--color-ivory-300)",
+                  backgroundColor: budgetLimit === 3000 ? "var(--color-ivory-200)" : "#FFF",
+                  color: "var(--color-ink-900)",
+                  cursor: "pointer",
+                  fontWeight: budgetLimit === 3000 ? 700 : 500
+                }}
+              >
+                ₹3,000 Refresh
+              </button>
+            </div>
+
             {/* Slider */}
             <div style={{ marginBottom: 24 }}>
               <input
@@ -177,6 +256,7 @@ export default function BudgetPlanner({
                 value={budgetLimit}
                 onChange={(e) => setBudgetLimit(Number(e.target.value))}
                 className="studio-slider"
+                aria-label="Planned budget limit ceiling"
               />
               <div
                 style={{
@@ -190,7 +270,7 @@ export default function BudgetPlanner({
               >
                 <span>₹0 (Free tweaks)</span>
                 <span>₹2,500</span>
-                <span>₹5,000 (Full room refresh)</span>
+                <span>₹5,000 (Full refresh)</span>
               </div>
             </div>
 
@@ -205,7 +285,7 @@ export default function BudgetPlanner({
               }}
             >
               <div style={{ display: "flex", justifyContent: "space-between", fontSize: 13 }}>
-                <span style={{ color: "var(--color-ink-600)" }}>Things you've picked ({selectedItems.length}):</span>
+                <span style={{ color: "var(--color-ink-600)" }}>Selected upgrades ({selectedItems.length}):</span>
                 <strong style={{ fontFamily: "var(--font-mono)", color: "var(--color-ink-900)" }}>
                   ₹{totalCost.toLocaleString()}
                 </strong>
@@ -250,46 +330,100 @@ export default function BudgetPlanner({
                 </p>
               </div>
 
-              {/* Free items reassuring reminder */}
-              <div style={{ fontSize: 11, color: "var(--color-ink-500)", fontStyle: "italic", marginTop: 4 }}>
-                * 4 of the most impactful upgrades in this list cost exactly ₹0.
+              {/* Transparent Cost Methodology Disclosure */}
+              <div
+                style={{
+                  marginTop: 6,
+                  padding: "10px 12px",
+                  backgroundColor: "var(--color-ivory-50)",
+                  border: "1px solid var(--color-ivory-300)",
+                  borderRadius: "var(--radius-xs)",
+                  fontSize: 11,
+                  color: "var(--color-ink-600)",
+                  lineHeight: 1.45
+                }}
+              >
+                <strong style={{ color: "var(--color-ink-900)", display: "block", marginBottom: 3 }}>
+                  🔍 Transparent Cost Methodology:
+                </strong>
+                Every item is priced against real open-market and stationery stores (2026). Zero sponsored brand markups, zero hidden tools. 4 fixes cost exactly ₹0.
               </div>
             </div>
           </div>
 
           {/* Right Column: Interactive Action Checklist */}
           <div>
-            {/* Spotlight Banner for Renters on ₹0 Budget */}
-            <div
-              style={{
-                backgroundColor: "var(--color-ivory-50)",
-                border: "1px solid var(--color-ivory-300)",
-                borderRadius: "var(--radius-sm)",
-                padding: "14px 18px",
-                marginBottom: 16,
-                display: "flex",
-                alignItems: "center",
-                gap: 12
-              }}
-            >
+            {/* Spotlight Banner for Renters on ₹0 or Small Budget */}
+            {budgetLimit === 0 ? (
               <div
+                className="animate-fade-in"
                 style={{
-                  width: 28,
-                  height: 28,
-                  borderRadius: "50%",
                   backgroundColor: "var(--color-sage-bg)",
+                  border: "1px solid rgba(107, 127, 109, 0.3)",
+                  borderRadius: "var(--radius-sm)",
+                  padding: "16px 20px",
+                  marginBottom: 16,
                   display: "flex",
                   alignItems: "center",
-                  justifyContent: "center",
-                  flexShrink: 0
+                  gap: 14
                 }}
               >
-                <Sparkles size={14} color="var(--color-sage-dark)" />
+                <div
+                  style={{
+                    width: 32,
+                    height: 32,
+                    borderRadius: "50%",
+                    backgroundColor: "var(--color-sage)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0,
+                    color: "#FFF"
+                  }}
+                >
+                  <Sparkles size={16} />
+                </div>
+                <div>
+                  <strong style={{ fontSize: 13, color: "var(--color-sage-dark)", display: "block", marginBottom: 2 }}>
+                    ₹0 Zero Budget Mode Active
+                  </strong>
+                  <p style={{ fontSize: 12, color: "var(--color-ink-800)", lineHeight: 1.45, margin: 0 }}>
+                    You don't need to spend a single rupee to calm visual room chaos. The 4 free fixes below use items you already own (binder clips, spare saucers, window light repositioning) and take under 30 minutes total.
+                  </p>
+                </div>
               </div>
-              <p style={{ fontSize: 12, color: "var(--color-ink-700)", lineHeight: 1.4, margin: 0 }}>
-                <strong style={{ color: "var(--color-ink-900)" }}>Starting with ₹0?</strong> The 4 free fixes below take under 30 minutes total and make an immediate visual difference before you spend a single rupee.
-              </p>
-            </div>
+            ) : (
+              <div
+                style={{
+                  backgroundColor: "var(--color-ivory-50)",
+                  border: "1px solid var(--color-ivory-300)",
+                  borderRadius: "var(--radius-sm)",
+                  padding: "14px 18px",
+                  marginBottom: 16,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 12
+                }}
+              >
+                <div
+                  style={{
+                    width: 28,
+                    height: 28,
+                    borderRadius: "50%",
+                    backgroundColor: "var(--color-sage-bg)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0
+                  }}
+                >
+                  <Sparkles size={14} color="var(--color-sage-dark)" />
+                </div>
+                <p style={{ fontSize: 12, color: "var(--color-ink-700)", lineHeight: 1.4, margin: 0 }}>
+                  <strong style={{ color: "var(--color-ink-900)" }}>Working with a tight budget?</strong> Four of our highest-impact room fixes cost exactly ₹0 and require zero tools or purchases.
+                </p>
+              </div>
+            )}
 
             {/* Category filter tabs */}
             <div
@@ -339,14 +473,25 @@ export default function BudgetPlanner({
                 return (
                   <div
                     key={item.id}
+                    role="checkbox"
+                    tabIndex={0}
+                    aria-checked={isChecked}
+                    aria-label={`${item.title}, ${item.cost === 0 ? "free" : "cost ₹" + item.cost}`}
                     onClick={() => toggleItem(item.id)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        toggleItem(item.id);
+                      }
+                    }}
+                    className="card-interactive"
                     style={{
                       backgroundColor: "#FFF",
                       borderRadius: "var(--radius-sm)",
                       border: isChecked ? "1.5px solid var(--color-ink-900)" : "1px solid var(--color-ivory-300)",
                       padding: "16px 20px",
                       cursor: "pointer",
-                      transition: "all 0.15s ease"
+                      transition: "border-color 0.15s ease, box-shadow 0.15s ease, transform 0.12s ease"
                     }}
                   >
                     <div
