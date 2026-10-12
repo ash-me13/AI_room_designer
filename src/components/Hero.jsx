@@ -197,8 +197,8 @@ export default function Hero() {
                 color: "var(--color-ink-600)"
               }}
             >
-              <span>TYPICAL 95 SQ.FT HOSTEL ROOM</span>
-              <span className="badge-arch badge-sage">AFTER SIMPLE SWAPS</span>
+              <span>ILLUSTRATIVE CASE STUDY (95 SQ.FT HOSTEL)</span>
+              <span className="badge-arch badge-sage">DEMO ROOM SPEC</span>
             </div>
 
             {/* Visual Image with friendly overlay tags */}
@@ -319,6 +319,9 @@ export default function Hero() {
                     marginBottom: 2
                   }}
                 >
+                  <strong style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--color-ink-500)", fontWeight: 600, display: "inline-block", marginRight: 4 }}>
+                    Case Study Spec:
+                  </strong>
                   "Turned off the buzzing tube light, hung a warm paper globe, and rolled out a jute rug."
                 </p>
                 <span
@@ -329,7 +332,7 @@ export default function Hero() {
                     textTransform: "uppercase"
                   }}
                 >
-                  Floor area: ~95 sq.ft • Total spent: ₹1,850
+                  Illustrative sample area: ~95 sq.ft • Verified swaps: ₹1,850
                 </span>
               </div>
 

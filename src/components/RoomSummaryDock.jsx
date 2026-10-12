@@ -81,7 +81,7 @@ export default function RoomSummaryDock({
             title="Jump to room visualizer"
           >
             <Compass size={14} color="var(--color-terracotta)" />
-            <span>Room: <strong>{currentPreset.name}</strong></span>
+            <span>Room: <strong>{currentPreset.name}</strong> <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "var(--color-ink-500)" }}>(Demo Sample)</span></span>
           </button>
 
           <span style={{ color: "var(--color-ivory-300)" }} className="hide-mobile">•</span>

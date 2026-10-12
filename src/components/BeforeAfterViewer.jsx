@@ -23,8 +23,33 @@ export default function BeforeAfterViewer({
     setSliderPosition(percentage);
   }, []);
 
-  const handleMouseDown = () => setIsDragging(true);
-  const handleTouchStart = () => setIsDragging(true);
+  const handleMouseDown = (e) => {
+    setIsDragging(true);
+    handleMove(e.clientX);
+  };
+
+  const handleTouchStart = (e) => {
+    setIsDragging(true);
+    if (e.touches[0]) {
+      handleMove(e.touches[0].clientX);
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "ArrowLeft" || e.key === "ArrowDown") {
+      e.preventDefault();
+      setSliderPosition((prev) => Math.max(0, prev - (e.shiftKey ? 15 : 5)));
+    } else if (e.key === "ArrowRight" || e.key === "ArrowUp") {
+      e.preventDefault();
+      setSliderPosition((prev) => Math.min(100, prev + (e.shiftKey ? 15 : 5)));
+    } else if (e.key === "Home") {
+      e.preventDefault();
+      setSliderPosition(0);
+    } else if (e.key === "End") {
+      e.preventDefault();
+      setSliderPosition(100);
+    }
+  };
 
   useEffect(() => {
     const handleMouseUp = () => setIsDragging(false);
@@ -51,6 +76,11 @@ export default function BeforeAfterViewer({
       window.removeEventListener("touchmove", handleTouchMove);
     };
   }, [isDragging, handleMove]);
+
+  const smoothTransitionStyle = isDragging
+    ? "none"
+    : "clip-path 0.22s cubic-bezier(0.16, 1, 0.3, 1), left 0.22s cubic-bezier(0.16, 1, 0.3, 1)";
+
 
   return (
     <div
@@ -94,7 +124,7 @@ export default function BeforeAfterViewer({
               letterSpacing: "0.04em"
             }}
           >
-            SEE THE DIFFERENCE
+            ILLUSTRATIVE CASE STUDY (DEMO DATA)
           </span>
           <span style={{ color: "var(--color-ivory-300)" }}>|</span>
           <span
@@ -108,8 +138,67 @@ export default function BeforeAfterViewer({
           </span>
         </div>
 
-        {/* View Mode controls */}
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+        {/* View Mode & Preset controls */}
+        <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 8 }}>
+          {viewMode === "slider" && (
+            <div style={{ display: "inline-flex", background: "var(--color-ivory-200)", borderRadius: 4, padding: 2 }}>
+              <button
+                onClick={() => setSliderPosition(100)}
+                className="btn-ghost"
+                style={{
+                  border: "none",
+                  background: sliderPosition === 100 ? "#FFF" : "transparent",
+                  color: sliderPosition === 100 ? "var(--color-ink-900)" : "var(--color-ink-600)",
+                  padding: "4px 8px",
+                  borderRadius: 3,
+                  fontSize: 11,
+                  fontFamily: "var(--font-mono)",
+                  cursor: "pointer",
+                  fontWeight: sliderPosition === 100 ? 600 : 400
+                }}
+                title="View original room only"
+              >
+                100% Before
+              </button>
+              <button
+                onClick={() => setSliderPosition(50)}
+                className="btn-ghost"
+                style={{
+                  border: "none",
+                  background: sliderPosition === 50 ? "#FFF" : "transparent",
+                  color: sliderPosition === 50 ? "var(--color-ink-900)" : "var(--color-ink-600)",
+                  padding: "4px 8px",
+                  borderRadius: 3,
+                  fontSize: 11,
+                  fontFamily: "var(--font-mono)",
+                  cursor: "pointer",
+                  fontWeight: sliderPosition === 50 ? 600 : 400
+                }}
+                title="50/50 split comparison"
+              >
+                50/50 Split
+              </button>
+              <button
+                onClick={() => setSliderPosition(0)}
+                className="btn-ghost"
+                style={{
+                  border: "none",
+                  background: sliderPosition === 0 ? "#FFF" : "transparent",
+                  color: sliderPosition === 0 ? "var(--color-ink-900)" : "var(--color-ink-600)",
+                  padding: "4px 8px",
+                  borderRadius: 3,
+                  fontSize: 11,
+                  fontFamily: "var(--font-mono)",
+                  cursor: "pointer",
+                  fontWeight: sliderPosition === 0 ? 600 : 400
+                }}
+                title="View transformed room only"
+              >
+                100% After
+              </button>
+            </div>
+          )}
+
           <button
             onClick={() => setShowAnnotations(!showAnnotations)}
             className={`btn ${showAnnotations ? "btn-secondary" : "btn-ghost"}`}
@@ -170,7 +259,7 @@ export default function BeforeAfterViewer({
           style={{
             position: "relative",
             width: "100%",
-            height: "540px",
+            height: "clamp(340px, 52vw, 560px)",
             userSelect: "none",
             overflow: "hidden",
             cursor: "ew-resize",
@@ -179,10 +268,12 @@ export default function BeforeAfterViewer({
           onMouseDown={handleMouseDown}
           onTouchStart={handleTouchStart}
         >
-          {/* Base Layer: AFTER (Transformed) Image */}
+          {/* Base Layer: AFTER (Transformed) Image with gentle crossfade */}
           <img
+            key={afterImage}
             src={afterImage}
             alt="RoomRevive Transformed Room"
+            className="animate-fade-in"
             style={{
               position: "absolute",
               top: 0,
@@ -200,7 +291,8 @@ export default function BeforeAfterViewer({
               position: "absolute",
               inset: 0,
               overflow: "hidden",
-              clipPath: `polygon(0 0, ${sliderPosition}% 0, ${sliderPosition}% 100%, 0 100%)`
+              clipPath: `polygon(0 0, ${sliderPosition}% 0, ${sliderPosition}% 100%, 0 100%)`,
+              transition: smoothTransitionStyle
             }}
           >
             <img
@@ -214,7 +306,7 @@ export default function BeforeAfterViewer({
               }}
             />
 
-            {/* Before Friendly Stamp */}
+            {/* Before Stamp */}
             <div
               style={{
                 position: "absolute",
@@ -230,11 +322,11 @@ export default function BeforeAfterViewer({
                 border: "1px solid var(--color-ink-600)"
               }}
             >
-              BEFORE (PLAIN &amp; COLD)
+              BEFORE (ILLUSTRATIVE RAW RENTAL)
             </div>
           </div>
 
-          {/* After Friendly Stamp */}
+          {/* After Stamp */}
           <div
             style={{
               position: "absolute",
@@ -250,7 +342,7 @@ export default function BeforeAfterViewer({
               border: "1px solid rgba(255, 255, 255, 0.25)"
             }}
           >
-            AFTER (WARM &amp; COZY)
+            AFTER (ZERO-DAMAGE DESIGN MAKEOVER)
           </div>
 
           {/* Precision Architectural Vernier Slider Divider */}
@@ -265,7 +357,8 @@ export default function BeforeAfterViewer({
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              pointerEvents: "none"
+              pointerEvents: "none",
+              transition: smoothTransitionStyle
             }}
           >
             {/* Precision Hairline */}
@@ -280,8 +373,15 @@ export default function BeforeAfterViewer({
               }}
             />
 
-            {/* Architectural Drafting Slider Indicator */}
+            {/* Architectural Drafting Slider Indicator with keyboard accessibility */}
             <div
+              tabIndex={0}
+              role="slider"
+              aria-label="Before-and-after room comparison slider"
+              aria-valuenow={Math.round(sliderPosition)}
+              aria-valuemin={0}
+              aria-valuemax={100}
+              onKeyDown={handleKeyDown}
               style={{
                 width: 28,
                 height: 28,
@@ -294,8 +394,11 @@ export default function BeforeAfterViewer({
                 justifyContent: "center",
                 color: "var(--color-ink-900)",
                 cursor: "ew-resize",
-                zIndex: 10
+                zIndex: 10,
+                pointerEvents: "auto",
+                transition: "transform 0.12s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.12s ease"
               }}
+              className="card-interactive"
             >
               <MoveHorizontal size={14} strokeWidth={2.4} />
             </div>
@@ -310,9 +413,20 @@ export default function BeforeAfterViewer({
               return (
                 <div
                   key={ann.id}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Design tip ${ann.id}: ${ann.title || "Zero-damage recommendation"}`}
+                  aria-pressed={isSelected}
                   onClick={(e) => {
                     e.stopPropagation();
                     onSelectAnnotation(isSelected ? null : ann);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      onSelectAnnotation(isSelected ? null : ann);
+                    }
                   }}
                   style={{
                     position: "absolute",
@@ -325,8 +439,8 @@ export default function BeforeAfterViewer({
                 >
                   <div
                     style={{
-                      width: 22,
-                      height: 22,
+                      width: 24,
+                      height: 24,
                       borderRadius: 2,
                       backgroundColor: isSelected ? "var(--color-ink-900)" : "var(--color-terracotta)",
                       color: "#FFF",
@@ -337,9 +451,11 @@ export default function BeforeAfterViewer({
                       alignItems: "center",
                       justifyContent: "center",
                       border: "1.5px solid #FFFFFF",
-                      boxShadow: "0 2px 6px rgba(0,0,0,0.3)",
-                      transition: "transform 0.15s ease"
+                      boxShadow: isSelected ? "0 0 0 2px var(--color-ink-900), 0 3px 8px rgba(0,0,0,0.35)" : "0 2px 6px rgba(0,0,0,0.3)",
+                      transition: "transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.15s ease",
+                      transform: isSelected ? "scale(1.15)" : "scale(1)"
                     }}
+                    className="card-interactive"
                   >
                     0{ann.id}
                   </div>
@@ -359,7 +475,7 @@ export default function BeforeAfterViewer({
           className="side-by-side-grid"
         >
           {/* Before Column */}
-          <div style={{ position: "relative", height: "460px" }}>
+          <div style={{ position: "relative", height: "clamp(260px, 44vw, 460px)" }}>
             <img
               src={beforeImage}
               alt="Original Room Before"
@@ -378,12 +494,12 @@ export default function BeforeAfterViewer({
                 borderRadius: 3
               }}
             >
-              BEFORE
+              BEFORE (RAW RENTAL)
             </div>
           </div>
 
           {/* After Column */}
-          <div style={{ position: "relative", height: "460px" }}>
+          <div style={{ position: "relative", height: "clamp(260px, 44vw, 460px)" }}>
             <img
               src={afterImage}
               alt="Transformed Room"
@@ -402,7 +518,7 @@ export default function BeforeAfterViewer({
                 borderRadius: 3
               }}
             >
-              AFTER: REVIVED
+              AFTER (ZERO-DAMAGE MAKEOVER)
             </div>
 
             {/* Pins in side-by-side mode */}
@@ -412,7 +528,17 @@ export default function BeforeAfterViewer({
                 return (
                   <div
                     key={ann.id}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`Design tip ${ann.id}: ${ann.title || "Zero-damage recommendation"}`}
+                    aria-pressed={isSelected}
                     onClick={() => onSelectAnnotation(isSelected ? null : ann)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        onSelectAnnotation(isSelected ? null : ann);
+                      }
+                    }}
                     style={{
                       position: "absolute",
                       top: `${ann.y}%`,
@@ -431,11 +557,15 @@ export default function BeforeAfterViewer({
                         color: "#FFF",
                         fontFamily: "var(--font-mono)",
                         fontSize: 10,
+                        fontWeight: 700,
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        boxShadow: "0 0 0 2px #fff"
+                        boxShadow: isSelected ? "0 0 0 2px var(--color-ink-900), 0 3px 8px rgba(0,0,0,0.35)" : "0 0 0 2px #fff",
+                        transition: "transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.15s ease",
+                        transform: isSelected ? "scale(1.15)" : "scale(1)"
                       }}
+                      className="card-interactive"
                     >
                       0{ann.id}
                     </div>

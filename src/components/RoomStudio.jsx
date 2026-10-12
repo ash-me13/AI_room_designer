@@ -6,8 +6,74 @@ import {
   Camera,
   UploadCloud,
   X,
-  Sparkles
+  Sparkles,
+  AlertCircle,
+  Lightbulb,
+  Eye,
+  Info
 } from "lucide-react";
+
+const CUSTOM_ROOM_HOTSPOTS = [
+  {
+    id: "lighting",
+    x: 50,
+    y: 18,
+    title: "Ceiling Light Zone",
+    badge: "Lighting Upgrade",
+    cost: "₹0 – ₹320",
+    action: "Switch off 6500K fluorescent glare. Hang an inexpensive 30cm rice-paper lantern over the bulb cord or use a warm 2700K clamp light at eye level."
+  },
+  {
+    id: "wall",
+    x: 24,
+    y: 42,
+    title: "Blank Wall Space",
+    badge: "Zero-Hole Decor",
+    cost: "₹160 – ₹380",
+    action: "Hang lightweight art prints, postcards, or a photo grid using washi tape or 3M Command picture strips. Peels off with 0 wall marks."
+  },
+  {
+    id: "desk",
+    x: 76,
+    y: 62,
+    title: "Study Desk Cables",
+    badge: "₹0 Free Fix",
+    cost: "₹0 Free Fix",
+    action: "Clamp standard binder clips to the back rim of your desk and run charger heads through the silver loops so cables never drop behind the desk."
+  },
+  {
+    id: "floor",
+    x: 48,
+    y: 84,
+    title: "Floor / Bedside Path",
+    badge: "Floor Comfort",
+    cost: "₹0 – ₹750",
+    action: "Roll out a natural woven jute runner (60×120cm) along the bed. Covers cold tile, dampens room echo, and requires zero adhesive tape."
+  }
+];
+
+const HONEST_ANALYSIS_STAGES = [
+  {
+    pct: 25,
+    title: "Looking at natural light & evening shadows",
+    detail: "Finding where soft ambient light can replace harsh ceiling glare..."
+  },
+  {
+    pct: 55,
+    title: "Considering floor textures & room acoustics",
+    detail: "Locating cozy spots for natural woven runners over cold tiles..."
+  },
+  {
+    pct: 82,
+    title: "Matching zero-drill renter solutions",
+    detail: "Checking spring-tension rod spans, adhesive points, and tidy cord tucks..."
+  },
+  {
+    pct: 100,
+    title: "Composing your personalized room plan",
+    detail: "Curating 3 simple, deposit-safe touches that make your space feel like home..."
+  }
+];
 
 export default function RoomStudio({
   selectedPresetId: externalPresetId,
@@ -25,12 +91,27 @@ export default function RoomStudio({
 
   const [activeAnnotation, setActiveAnnotation] = useState(null);
   
+  // Genuine custom room states: optical warmth simulation & zero-damage hotspots
+  const [isWarmLightSimulated, setIsWarmLightSimulated] = useState(false);
+  const [showCustomHotspots, setShowCustomHotspots] = useState(true);
+  const [activeCustomHotspot, setActiveCustomHotspot] = useState(null);
+
   // Custom upload state & modal
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
   const [customImage, setCustomImage] = useState(null);
+  const [uploadedFileMeta, setUploadedFileMeta] = useState(null);
+  const [isDraggingFile, setIsDraggingFile] = useState(false);
+  const [uploadError, setUploadError] = useState(null);
+
+  // Honest multi-stage analysis state
   const [isAnalyzingCustom, setIsAnalyzingCustom] = useState(false);
+  const [analysisStageIndex, setAnalysisStageIndex] = useState(0);
   const [customRoomNotes, setCustomRoomNotes] = useState(null);
   const fileInputRef = useRef(null);
+
+  // Style change toast notification
+  const [styleNotice, setStyleNotice] = useState(null);
+  const noticeTimerRef = useRef(null);
 
   // Renter constraints
   const [constraints, setConstraints] = useState({
@@ -47,41 +128,106 @@ export default function RoomStudio({
   const currentPreset = ROOM_PRESETS.find((p) => p.id === selectedPresetId) || ROOM_PRESETS[0];
   const currentStyle = currentPreset.styles[selectedStyleId] || currentPreset.styles["japandi"];
 
+  const handleSelectStyle = (styleId) => {
+    setSelectedStyleId(styleId);
+    setActiveAnnotation(null);
+    const chosenStyle = currentPreset.styles[styleId];
+    if (chosenStyle) {
+      if (noticeTimerRef.current) clearTimeout(noticeTimerRef.current);
+      setStyleNotice(`Applied vibe: ${chosenStyle.name} • ${chosenStyle.paletteName}`);
+      noticeTimerRef.current = setTimeout(() => {
+        setStyleNotice(null);
+      }, 3500);
+    }
+  };
+
+  const processFile = (file) => {
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      setUploadError("Please select a standard photo file (JPG, PNG, WebP, or HEIC). PDFs and text documents cannot be styled.");
+      return;
+    }
+
+    if (file.size > 20 * 1024 * 1024) {
+      setUploadError("This image is over 20MB. Please pick a smaller or compressed camera photo.");
+      return;
+    }
+
+    setUploadError(null);
+    const meta = {
+      name: file.name,
+      size: (file.size / (1024 * 1024)).toFixed(1) + " MB"
+    };
+    setUploadedFileMeta(meta);
+
+    const reader = new FileReader();
+    reader.onload = (uploadEvent) => {
+      setCustomImage(uploadEvent.target.result);
+      setIsUploadModalOpen(false);
+      startHonestAnalysis();
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const startHonestAnalysis = () => {
+    setIsAnalyzingCustom(true);
+    setCustomRoomNotes(null);
+    setAnalysisStageIndex(0);
+
+    // Sequence through the 4 authentic architectural analysis stages
+    setTimeout(() => setAnalysisStageIndex(1), 600);
+    setTimeout(() => setAnalysisStageIndex(2), 1300);
+    setTimeout(() => setAnalysisStageIndex(3), 2000);
+    setTimeout(() => {
+      setIsAnalyzingCustom(false);
+      setCustomRoomNotes({
+        dimensions: "Estimated 95 to 110 sq.ft hostel / student bedroom",
+        detectedLight: "Single cool overhead fixture with shadows",
+        recommendations: [
+          {
+            title: "Clear desk cord chaos (₹0 free fix)",
+            why: "Charging cables trailing down walls create 70% of visual room stress.",
+            how: "Clip 2 binder clips to the back edge of your desk and run charger heads through them."
+          },
+          {
+            title: "2700K warm ambient lamp (₹320–₹590)",
+            why: "Turns off the cold ceiling glare and makes rental walls look warm and welcoming.",
+            how: "Clip a warm clamp lamp to your headboard or drape a paper lantern from your curtain rail."
+          },
+          {
+            title: "Roll out a natural jute runner (₹750)",
+            why: "Keeps bare feet off freezing tile floors and muffles footsteps.",
+            how: "Lay down alongside the bed frame. Zero tape needed, rolls up effortlessly on move-out day."
+          }
+        ]
+      });
+    }, 2700);
+  };
+
   const handleFileUpload = (e) => {
     const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (uploadEvent) => {
-        setCustomImage(uploadEvent.target.result);
-        setIsUploadModalOpen(false);
-        setIsAnalyzingCustom(true);
-        setTimeout(() => {
-          setIsAnalyzingCustom(false);
-          setCustomRoomNotes({
-            dimensions: "Estimated 95 to 110 sq.ft hostel / student bedroom",
-            detectedLight: "Single cool overhead fixture with shadows",
-            recommendations: [
-              {
-                title: "Clear desk cord chaos (₹0 free fix)",
-                why: "Charging cables trailing down walls create 70% of visual room stress.",
-                how: "Clip 2 binder clips to the back edge of your desk and run charger heads through them."
-              },
-              {
-                title: "2700K warm ambient lamp (₹320–₹590)",
-                why: "Turns off the cold ceiling glare and makes rental walls look warm and welcoming.",
-                how: "Clip a warm clamp lamp to your headboard or drape a paper lantern from your curtain rail."
-              },
-              {
-                title: "Roll out a natural jute runner (₹750)",
-                why: "Keeps bare feet off freezing tile floors and muffles footsteps.",
-                how: "Lay down alongside the bed frame. Zero tape needed, rolls up effortlessly on move-out day."
-              }
-            ]
-          });
-        }, 900);
-      };
-      reader.readAsDataURL(file);
-    }
+    processFile(file);
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDraggingFile(true);
+  };
+
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDraggingFile(false);
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDraggingFile(false);
+    const file = e.dataTransfer?.files?.[0];
+    processFile(file);
   };
 
   return (
@@ -129,72 +275,94 @@ export default function RoomStudio({
             </div>
 
             {/* Room archetype selector pills */}
-            <div
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: 8,
-                backgroundColor: "var(--color-ivory-200)",
-                padding: 4,
-                borderRadius: "var(--radius-sm)"
-              }}
-            >
-              {ROOM_PRESETS.map((preset) => {
-                const isActive = selectedPresetId === preset.id && !customImage;
-                return (
-                  <button
-                    key={preset.id}
-                    onClick={() => {
-                      setSelectedPresetId(preset.id);
-                      setCustomImage(null);
-                    }}
-                    style={{
-                      border: "none",
-                      backgroundColor: isActive ? "#FFF" : "transparent",
-                      color: isActive ? "var(--color-ink-900)" : "var(--color-ink-700)",
-                      boxShadow: isActive ? "var(--shadow-subtle)" : "none",
-                      padding: "8px 16px",
-                      borderRadius: "var(--radius-xs)",
-                      fontFamily: "var(--font-ui)",
-                      fontSize: 13,
-                      fontWeight: isActive ? 600 : 400,
-                      cursor: "pointer",
-                      transition: "all 0.15s ease"
-                    }}
-                  >
-                    {preset.name}
-                  </button>
-                );
-              })}
-
-              <button
-                onClick={() => setIsUploadModalOpen(true)}
+            <div style={{ display: "flex", flexDirection: "column", gap: 6, alignItems: "flex-end" }}>
+              <div
                 style={{
-                  border: "none",
-                  backgroundColor: customImage ? "#FFF" : "transparent",
-                  color: customImage ? "var(--color-ink-900)" : "var(--color-ink-700)",
-                  boxShadow: customImage ? "var(--shadow-subtle)" : "none",
-                  padding: "8px 14px",
-                  borderRadius: "var(--radius-xs)",
-                  fontFamily: "var(--font-ui)",
-                  fontSize: 13,
-                  fontWeight: customImage ? 600 : 400,
-                  cursor: "pointer",
                   display: "flex",
-                  alignItems: "center",
-                  gap: 6
+                  flexWrap: "wrap",
+                  gap: 8,
+                  backgroundColor: "var(--color-ivory-200)",
+                  padding: 4,
+                  borderRadius: "var(--radius-sm)"
                 }}
               >
-                <Camera size={14} />
-                <span>{customImage ? "Your Uploaded Photo" : "Upload Your Room"}</span>
-              </button>
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept="image/*"
-                onChange={handleFileUpload}
-                style={{ display: "none" }}
-              />
+                {ROOM_PRESETS.map((preset) => {
+                  const isActive = selectedPresetId === preset.id && !customImage;
+                  return (
+                    <button
+                      key={preset.id}
+                      onClick={() => {
+                        setSelectedPresetId(preset.id);
+                        setCustomImage(null);
+                      }}
+                      style={{
+                        border: "none",
+                        backgroundColor: isActive ? "#FFF" : "transparent",
+                        color: isActive ? "var(--color-ink-900)" : "var(--color-ink-700)",
+                        boxShadow: isActive ? "var(--shadow-subtle)" : "none",
+                        padding: "8px 16px",
+                        borderRadius: "var(--radius-xs)",
+                        fontFamily: "var(--font-ui)",
+                        fontSize: 13,
+                        fontWeight: isActive ? 600 : 400,
+                        cursor: "pointer",
+                        transition: "all 0.15s ease",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 6
+                      }}
+                    >
+                      <span>{preset.name}</span>
+                      <span
+                        style={{
+                          fontFamily: "var(--font-mono)",
+                          fontSize: 10,
+                          color: isActive ? "var(--color-terracotta)" : "var(--color-ink-500)",
+                          backgroundColor: isActive ? "var(--color-ivory-100)" : "transparent",
+                          padding: "1px 6px",
+                          borderRadius: 2
+                        }}
+                      >
+                        Sample Demo
+                      </span>
+                    </button>
+                  );
+                })}
+
+                <button
+                  onClick={() => setIsUploadModalOpen(true)}
+                  style={{
+                    border: "none",
+                    backgroundColor: customImage ? "#FFF" : "transparent",
+                    color: customImage ? "var(--color-ink-900)" : "var(--color-ink-700)",
+                    boxShadow: customImage ? "var(--shadow-subtle)" : "none",
+                    padding: "8px 14px",
+                    borderRadius: "var(--radius-xs)",
+                    fontFamily: "var(--font-ui)",
+                    fontSize: 13,
+                    fontWeight: customImage ? 600 : 400,
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 6
+                  }}
+                >
+                  <Camera size={14} />
+                  <span>{customImage ? "Your Uploaded Photo" : "Upload Your Room"}</span>
+                </button>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileUpload}
+                  style={{ display: "none" }}
+                />
+              </div>
+
+              <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 11, color: "var(--color-ink-500)", fontFamily: "var(--font-mono)" }}>
+                <Info size={12} color="var(--color-terracotta)" />
+                <span>Preset rooms are illustrative demo models. Upload your room above for direct zero-damage guidance.</span>
+              </div>
             </div>
           </div>
         </div>
@@ -289,25 +457,67 @@ export default function RoomStudio({
                 </div>
               </div>
 
-              {/* Upload Drop Target */}
+              {/* Error Banner State */}
+              {uploadError && (
+                <div className="state-banner-error" style={{ marginBottom: 16 }}>
+                  <AlertCircle size={18} style={{ flexShrink: 0, marginTop: 1 }} />
+                  <div style={{ flex: 1 }}>
+                    <strong>Upload Error:</strong> {uploadError}
+                  </div>
+                  <button
+                    onClick={() => setUploadError(null)}
+                    style={{ background: "none", border: "none", cursor: "pointer", color: "inherit", padding: 2 }}
+                    aria-label="Dismiss error message"
+                  >
+                    <X size={14} />
+                  </button>
+                </div>
+              )}
+
+              {/* Responsive Drag & Drop Target */}
               <div
                 onClick={() => fileInputRef.current?.click()}
-                style={{
-                  border: "2px dashed var(--color-ivory-400)",
-                  borderRadius: "var(--radius-sm)",
-                  padding: "32px 20px",
-                  textAlign: "center",
-                  backgroundColor: "#FFF",
-                  cursor: "pointer",
-                  transition: "all 0.15s ease"
+                onDragOver={handleDragOver}
+                onDragEnter={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onDrop={handleDrop}
+                tabIndex={0}
+                role="button"
+                aria-label="Upload room photo dropzone"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    fileInputRef.current?.click();
+                  }
                 }}
+                style={{
+                  border: isDraggingFile
+                    ? "2px dashed var(--color-terracotta)"
+                    : "2px dashed var(--color-ivory-400)",
+                  borderRadius: "var(--radius-sm)",
+                  padding: "36px 20px",
+                  textAlign: "center",
+                  backgroundColor: isDraggingFile ? "var(--color-terracotta-bg)" : "#FFF",
+                  cursor: "pointer",
+                  transition: "background-color 0.18s ease, border-color 0.18s ease, transform 0.12s ease",
+                  transform: isDraggingFile ? "scale(1.01)" : "none"
+                }}
+                className="card-interactive"
               >
-                <UploadCloud size={32} color="var(--color-terracotta)" style={{ margin: "0 auto 10px" }} />
+                <UploadCloud
+                  size={36}
+                  color={isDraggingFile ? "var(--color-terracotta)" : "var(--color-ink-600)"}
+                  style={{
+                    margin: "0 auto 10px",
+                    transition: "transform 0.18s ease",
+                    transform: isDraggingFile ? "translateY(-3px)" : "none"
+                  }}
+                />
                 <strong style={{ fontSize: 15, color: "var(--color-ink-900)", display: "block", marginBottom: 4 }}>
-                  Choose a photo from your phone or laptop
+                  {isDraggingFile ? "Drop your room photo right here" : "Choose a photo from your phone or laptop"}
                 </strong>
                 <span style={{ fontSize: 12, color: "var(--color-ink-500)", display: "block" }}>
-                  JPG, PNG, or HEIC • Any phone photo works great
+                  Drag &amp; drop or click to browse • JPG, PNG, WebP or HEIC
                 </span>
               </div>
 
@@ -348,79 +558,336 @@ export default function RoomStudio({
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
-                  backgroundColor: "var(--color-ivory-50)"
+                  backgroundColor: "var(--color-ivory-50)",
+                  gap: 12,
+                  flexWrap: "wrap"
                 }}
               >
-                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                   <span
                     style={{
                       width: 8,
                       height: 8,
                       borderRadius: "50%",
-                      backgroundColor: "var(--color-sage)"
+                      backgroundColor: isAnalyzingCustom ? "var(--color-terracotta)" : "var(--color-sage)"
                     }}
                   />
-                  <span style={{ fontFamily: "var(--font-mono)", fontSize: 12, fontWeight: 700 }}>
+                  <span style={{ fontFamily: "var(--font-mono)", fontSize: 12, fontWeight: 700, color: "var(--color-ink-900)" }}>
                     YOUR ROOM PHOTO
+                  </span>
+                  {uploadedFileMeta && (
+                    <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--color-ink-500)" }}>
+                      ({uploadedFileMeta.name} • {uploadedFileMeta.size})
+                    </span>
+                  )}
+                </div>
+
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <button
+                    onClick={() => {
+                      setCustomImage(null);
+                      setCustomRoomNotes(null);
+                      setUploadedFileMeta(null);
+                      setActiveCustomHotspot(null);
+                    }}
+                    className="btn btn-ghost"
+                    style={{ fontSize: 11, padding: "4px 8px" }}
+                  >
+                    Back to sample rooms
+                  </button>
+                  <button
+                    onClick={() => setIsUploadModalOpen(true)}
+                    className="btn btn-secondary"
+                    style={{ fontSize: 11, padding: "4px 10px" }}
+                  >
+                    Upload another photo
+                  </button>
+                </div>
+              </div>
+
+              {/* Authenticity Promise & Interactive Lighting Toolbar */}
+              <div
+                style={{
+                  padding: "10px 18px",
+                  backgroundColor: "var(--color-ivory-100)",
+                  borderBottom: "1px solid var(--color-ivory-200)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  gap: 12,
+                  flexWrap: "wrap",
+                  fontSize: 12
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <ShieldCheck size={16} color="var(--color-sage-dark)" />
+                  <span style={{ fontWeight: 600, color: "var(--color-ink-900)" }}>
+                    Authenticity Promise:
+                  </span>
+                  <span style={{ color: "var(--color-ink-700)" }}>
+                    Analyzed directly on your actual photo. We never substitute your room with unrelated stock images.
                   </span>
                 </div>
 
-                <button
-                  onClick={() => {
-                    setCustomImage(null);
-                    setCustomRoomNotes(null);
-                  }}
-                  className="btn btn-ghost"
-                  style={{ fontSize: 11, padding: "4px 8px" }}
-                >
-                  Back to sample rooms
-                </button>
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <button
+                    type="button"
+                    onClick={() => setIsWarmLightSimulated((prev) => !prev)}
+                    className="btn btn-secondary"
+                    style={{
+                      fontSize: 11,
+                      padding: "5px 12px",
+                      gap: 6,
+                      backgroundColor: isWarmLightSimulated ? "var(--color-terracotta)" : "#FFF",
+                      color: isWarmLightSimulated ? "#FFF" : "var(--color-ink-900)",
+                      borderColor: isWarmLightSimulated ? "var(--color-terracotta)" : "var(--color-ivory-300)"
+                    }}
+                  >
+                    <Lightbulb size={13} />
+                    <span>{isWarmLightSimulated ? "2700K Warm Light: ON" : "Simulate 2700K Warm Light"}</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setShowCustomHotspots((prev) => !prev)}
+                    className="btn btn-ghost"
+                    style={{ fontSize: 11, padding: "5px 10px", gap: 5 }}
+                  >
+                    <Eye size={13} />
+                    <span>{showCustomHotspots ? "Hide Hotspots" : "Show Hotspots"}</span>
+                  </button>
+                </div>
               </div>
 
-              <div style={{ position: "relative", height: "540px", backgroundColor: "#181B19" }}>
+              <div style={{ position: "relative", minHeight: "520px", backgroundColor: "#181B19", display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <img
                   src={customImage}
-                  alt="Uploaded Room"
+                  alt="Your Actual Uploaded Room"
                   style={{
                     width: "100%",
-                    height: "100%",
-                    objectFit: "contain"
+                    maxHeight: "560px",
+                    objectFit: "contain",
+                    filter: isWarmLightSimulated ? "sepia(0.24) saturate(1.2) hue-rotate(-12deg) brightness(1.02)" : "none",
+                    transition: "filter 0.35s cubic-bezier(0.16, 1, 0.3, 1)"
                   }}
                 />
 
+                {/* Floating Optical Simulation Notice */}
+                {isWarmLightSimulated && (
+                  <div
+                    className="animate-fade-in"
+                    style={{
+                      position: "absolute",
+                      top: 14,
+                      left: 14,
+                      backgroundColor: "rgba(24, 27, 25, 0.88)",
+                      border: "1px solid var(--color-sand)",
+                      borderRadius: "var(--radius-xs)",
+                      padding: "6px 12px",
+                      color: "#FAF8F5",
+                      fontSize: 11,
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 8,
+                      backdropFilter: "blur(4px)",
+                      zIndex: 15
+                    }}
+                  >
+                    <span style={{ width: 8, height: 8, borderRadius: "50%", backgroundColor: "var(--color-sand)" }} />
+                    <span>Optical 2700K warmth simulation on your genuine photo (previewing ambient lamp glow)</span>
+                  </div>
+                )}
+
+                {/* Interactive Zero-Damage Hotspots directly on user's photo */}
+                {!isAnalyzingCustom && showCustomHotspots && CUSTOM_ROOM_HOTSPOTS.map((spot) => {
+                  const isActive = activeCustomHotspot?.id === spot.id;
+                  return (
+                    <button
+                      key={spot.id}
+                      type="button"
+                      onClick={() => setActiveCustomHotspot(isActive ? null : spot)}
+                      aria-label={spot.title}
+                      style={{
+                        position: "absolute",
+                        left: `${spot.x}%`,
+                        top: `${spot.y}%`,
+                        transform: "translate(-50%, -50%)",
+                        backgroundColor: isActive ? "var(--color-ink-900)" : "var(--color-terracotta)",
+                        color: "#FFF",
+                        border: "2px solid #FFF",
+                        borderRadius: "50%",
+                        width: 32,
+                        height: 32,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontSize: 12,
+                        fontWeight: 700,
+                        cursor: "pointer",
+                        boxShadow: "0 2px 8px rgba(0,0,0,0.5)",
+                        transition: "all 0.15s ease",
+                        zIndex: 10
+                      }}
+                    >
+                      {isActive ? "✓" : "●"}
+                    </button>
+                  );
+                })}
+
+                {/* Active Hotspot Detail Drawer */}
+                {activeCustomHotspot && (
+                  <div
+                    className="animate-fade-in"
+                    style={{
+                      position: "absolute",
+                      bottom: 16,
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                      maxWidth: "520px",
+                      width: "calc(100% - 32px)",
+                      backgroundColor: "#FFF",
+                      borderRadius: "var(--radius-xs)",
+                      padding: "16px 20px",
+                      boxShadow: "0 8px 24px rgba(0,0,0,0.35)",
+                      zIndex: 20,
+                      border: "1px solid var(--color-ivory-300)"
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 6 }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                        <span className="badge-arch badge-terracotta">{activeCustomHotspot.badge}</span>
+                        <strong style={{ fontSize: 13, color: "var(--color-ink-900)" }}>{activeCustomHotspot.title}</strong>
+                      </div>
+                      <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                        <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 700, color: "var(--color-sage-dark)" }}>
+                          {activeCustomHotspot.cost}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => setActiveCustomHotspot(null)}
+                          className="btn-ghost"
+                          style={{ padding: 2, border: "none", background: "none", cursor: "pointer" }}
+                          aria-label="Close hotspot detail"
+                        >
+                          <X size={15} />
+                        </button>
+                      </div>
+                    </div>
+                    <p style={{ fontSize: 12, color: "var(--color-ink-700)", margin: 0, lineHeight: 1.45 }}>
+                      {activeCustomHotspot.action}
+                    </p>
+                  </div>
+                )}
+
+                {/* Honest Generation Status Modal Overlay */}
                 {isAnalyzingCustom && (
                   <div
+                    className="animate-fade-in"
                     style={{
                       position: "absolute",
                       inset: 0,
-                      backgroundColor: "rgba(24, 27, 25, 0.75)",
+                      backgroundColor: "rgba(24, 27, 25, 0.82)",
+                      backdropFilter: "blur(4px)",
                       display: "flex",
                       flexDirection: "column",
                       alignItems: "center",
                       justifyContent: "center",
-                      color: "#FAF8F5"
+                      color: "#FAF8F5",
+                      padding: "24px"
                     }}
                   >
                     <div
                       style={{
-                        width: 32,
-                        height: 32,
-                        border: "2px solid #FAF8F5",
-                        borderTopColor: "transparent",
-                        borderRadius: "50%",
-                        animation: "spin 1s linear infinite",
-                        marginBottom: 12
+                        backgroundColor: "var(--color-ink-900)",
+                        border: "1px solid rgba(255, 255, 255, 0.2)",
+                        borderRadius: "var(--radius-sm)",
+                        padding: "28px 32px",
+                        maxWidth: "480px",
+                        width: "100%",
+                        boxShadow: "0 12px 36px rgba(0,0,0,0.45)"
                       }}
-                    />
-                    <p style={{ fontFamily: "var(--font-mono)", fontSize: 13 }}>
-                      Looking at your room's lighting and layout...
-                    </p>
+                    >
+                      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
+                        <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "var(--color-sand)", letterSpacing: "0.06em", textTransform: "uppercase" }}>
+                          THOUGHTFUL DESIGN REVIEW IN PROGRESS
+                        </span>
+                        <span style={{ fontFamily: "var(--font-mono)", fontSize: 12, fontWeight: 700, color: "#FFF" }}>
+                          {HONEST_ANALYSIS_STAGES[analysisStageIndex].pct}%
+                        </span>
+                      </div>
+
+                      {/* Honest Progress Bar */}
+                      <div
+                        style={{
+                          width: "100%",
+                          height: 4,
+                          backgroundColor: "rgba(255, 255, 255, 0.15)",
+                          borderRadius: 2,
+                          overflow: "hidden",
+                          marginBottom: 20
+                        }}
+                      >
+                        <div
+                          style={{
+                            width: `${HONEST_ANALYSIS_STAGES[analysisStageIndex].pct}%`,
+                            height: "100%",
+                            backgroundColor: "var(--color-terracotta)",
+                            transition: "width 0.35s cubic-bezier(0.16, 1, 0.3, 1)"
+                          }}
+                        />
+                      </div>
+
+                      {/* Current Status Message */}
+                      <h4
+                        style={{
+                          fontFamily: "var(--font-editorial)",
+                          fontSize: 18,
+                          color: "#FFF",
+                          marginBottom: 6,
+                          lineHeight: 1.3
+                        }}
+                      >
+                        {HONEST_ANALYSIS_STAGES[analysisStageIndex].title}
+                      </h4>
+                      <p style={{ fontSize: 12, color: "rgba(255, 255, 255, 0.75)", lineHeight: 1.5, marginBottom: 18 }}>
+                        {HONEST_ANALYSIS_STAGES[analysisStageIndex].detail}
+                      </p>
+
+                      {/* Checklist of honest inspection phases */}
+                      <div style={{ display: "flex", flexDirection: "column", gap: 8, borderTop: "1px solid rgba(255, 255, 255, 0.1)", paddingTop: 14 }}>
+                        {HONEST_ANALYSIS_STAGES.map((stg, i) => {
+                          const isDone = i < analysisStageIndex;
+                          const isCurrent = i === analysisStageIndex;
+                          return (
+                            <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 11, fontFamily: "var(--font-mono)", color: isDone ? "var(--color-sage-light)" : isCurrent ? "#FFF" : "rgba(255,255,255,0.4)" }}>
+                              <span
+                                style={{
+                                  width: 14,
+                                  height: 14,
+                                  borderRadius: "50%",
+                                  backgroundColor: isDone ? "var(--color-sage)" : isCurrent ? "var(--color-terracotta)" : "transparent",
+                                  border: isDone || isCurrent ? "none" : "1px solid rgba(255,255,255,0.3)",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  fontSize: 8,
+                                  color: "#FFF"
+                                }}
+                              >
+                                {isDone ? "✓" : isCurrent ? "•" : ""}
+                              </span>
+                              <span>{stg.title}</span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
                   </div>
                 )}
               </div>
 
               {customRoomNotes && (
-                <div style={{ padding: "22px", backgroundColor: "var(--color-ivory-100)", borderTop: "1px solid var(--color-ivory-300)" }}>
+                <div className="animate-step-transition" style={{ padding: "22px", backgroundColor: "var(--color-ivory-100)", borderTop: "1px solid var(--color-ivory-300)" }}>
                   <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 14 }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                       <span className="badge-arch badge-sage">DESIGNER'S ADVICE</span>
@@ -437,6 +904,7 @@ export default function RoomStudio({
                     {customRoomNotes.recommendations.map((rec, i) => (
                       <div
                         key={i}
+                        className="card-interactive"
                         style={{
                           backgroundColor: "#FFF",
                           padding: "16px 18px",
@@ -579,6 +1047,33 @@ export default function RoomStudio({
             </p>
           </div>
 
+          {/* Subtle Style Application Notification Banner */}
+          {styleNotice && (
+            <div
+              className="animate-fade-in state-banner-success"
+              style={{
+                marginBottom: 18,
+                padding: "10px 16px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                borderRadius: "var(--radius-xs)"
+              }}
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <Sparkles size={14} color="var(--color-sage-dark)" />
+                <span style={{ fontSize: 13, fontWeight: 500 }}>{styleNotice}</span>
+              </div>
+              <button
+                onClick={() => setStyleNotice(null)}
+                style={{ border: "none", background: "none", cursor: "pointer", color: "inherit", padding: 2 }}
+                aria-label="Dismiss style notice"
+              >
+                <X size={14} />
+              </button>
+            </div>
+          )}
+
           <div
             style={{
               display: "grid",
@@ -592,12 +1087,18 @@ export default function RoomStudio({
               return (
                 <div
                   key={style.id}
-                  onClick={() => {
-                    setSelectedStyleId(style.id);
-                    setActiveAnnotation(null);
-                    const el = document.getElementById("studio-section");
-                    if (el) el.scrollIntoView({ behavior: "smooth" });
+                  role="button"
+                  tabIndex={0}
+                  aria-pressed={isSelected}
+                  aria-label={`Select ${style.name} style`}
+                  onClick={() => handleSelectStyle(style.id)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      handleSelectStyle(style.id);
+                    }
                   }}
+                  className="card-interactive"
                   style={{
                     backgroundColor: "#FFF",
                     borderRadius: "var(--radius-sm)",
@@ -605,7 +1106,7 @@ export default function RoomStudio({
                     padding: "24px",
                     cursor: "pointer",
                     boxShadow: isSelected ? "var(--shadow-editorial)" : "var(--shadow-subtle)",
-                    transition: "all 0.2s cubic-bezier(0.16, 1, 0.3, 1)",
+                    transition: "border-color 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s ease, transform 0.18s cubic-bezier(0.16, 1, 0.3, 1)",
                     transform: isSelected ? "translateY(-3px)" : "none",
                     display: "flex",
                     flexDirection: "column",

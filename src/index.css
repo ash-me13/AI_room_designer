@@ -174,13 +174,31 @@ h1, h2, h3, h4, .font-editorial {
   letter-spacing: 0.01em;
   border-radius: var(--radius-sm);
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: background-color 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.12s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.18s ease;
   border: 1px solid transparent;
   text-decoration: none;
 }
 
-.btn:active {
-  transform: scale(0.98);
+.btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-ink-900);
+  outline-offset: 2px;
+}
+
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+  box-shadow: none;
+  transform: none;
 }
 
 .btn-primary {
@@ -189,7 +207,7 @@ h1, h2, h3, h4, .font-editorial {
   border-color: var(--color-ink-900);
 }
 
-.btn-primary:hover {
+.btn-primary:hover:not(:disabled) {
   background-color: var(--color-ink-700);
   border-color: var(--color-ink-700);
   box-shadow: var(--shadow-subtle);
@@ -201,7 +219,7 @@ h1, h2, h3, h4, .font-editorial {
   border-color: var(--color-terracotta);
 }
 
-.btn-terracotta:hover {
+.btn-terracotta:hover:not(:disabled) {
   background-color: var(--color-terracotta-dark);
   border-color: var(--color-terracotta-dark);
   box-shadow: 0 4px 12px rgba(200, 102, 75, 0.2);
@@ -213,9 +231,10 @@ h1, h2, h3, h4, .font-editorial {
   border-color: var(--color-ivory-300);
 }
 
-.btn-secondary:hover {
+.btn-secondary:hover:not(:disabled) {
   background-color: #fff;
-  border-color: var(--color-ink-400);
+  border-color: var(--color-ink-500);
+  box-shadow: 0 1px 3px rgba(24, 27, 25, 0.04);
 }
 
 .btn-ghost {
@@ -223,12 +242,63 @@ h1, h2, h3, h4, .font-editorial {
   color: var(--color-ink-700);
 }
 
-.btn-ghost:hover {
+.btn-ghost:hover:not(:disabled) {
   background-color: var(--color-ivory-200);
   color: var(--color-ink-900);
 }
 
-/* Custom Range Input */
+/* Universal Accessible Focus Rings */
+:focus-visible {
+  outline: 2px solid var(--color-ink-900);
+  outline-offset: 2px;
+}
+
+/* Interactive Card & Tile States */
+.card-interactive {
+  transition: border-color 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-interactive:hover {
+  border-color: var(--color-ink-500);
+  box-shadow: var(--shadow-editorial);
+  transform: translateY(-2px);
+}
+
+.card-interactive:focus-visible {
+  outline: 2px solid var(--color-ink-900);
+  outline-offset: 3px;
+}
+
+/* Clear Honest Status & Notification States */
+.state-banner-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  background-color: var(--color-terracotta-bg);
+  border: 1px solid rgba(200, 102, 75, 0.35);
+  border-radius: var(--radius-xs);
+  color: var(--color-terracotta-dark);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.state-banner-success {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  background-color: var(--color-sage-bg);
+  border: 1px solid rgba(107, 127, 109, 0.35);
+  border-radius: var(--radius-xs);
+  color: var(--color-sage-dark);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+/* Custom Range Input with Restrained Focus & Drag */
 input[type="range"].studio-slider {
   -webkit-appearance: none;
   appearance: none;
@@ -237,6 +307,12 @@ input[type="range"].studio-slider {
   background: var(--color-ivory-300);
   border-radius: 3px;
   outline: none;
+  transition: background-color 0.15s ease;
+}
+
+input[type="range"].studio-slider:focus-visible {
+  outline: 2px solid var(--color-ink-900);
+  outline-offset: 4px;
 }
 
 input[type="range"].studio-slider::-webkit-slider-thumb {
@@ -249,11 +325,17 @@ input[type="range"].studio-slider::-webkit-slider-thumb {
   border: 2px solid var(--color-ivory-50);
   box-shadow: 0 2px 6px rgba(0,0,0,0.25);
   cursor: pointer;
-  transition: transform 0.1s ease;
+  transition: transform 0.12s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.15s ease;
 }
 
 input[type="range"].studio-slider::-webkit-slider-thumb:hover {
-  transform: scale(1.15);
+  transform: scale(1.12);
+  background-color: var(--color-ink-800);
+}
+
+input[type="range"].studio-slider:active::-webkit-slider-thumb {
+  transform: scale(1.18);
 }
 
 /* Subtle architectural crosshair mark */
@@ -285,20 +367,42 @@ input[type="range"].studio-slider::-webkit-slider-thumb:hover {
 ::-webkit-scrollbar-thumb {
   background: var(--color-ivory-300);
   border-radius: 4px;
+  transition: background-color 0.15s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-ink-400);
 }
 
-/* Purposeful transitions only */
+/* Purposeful, restrained transitions (subtle physical feel, zero gratuitous bounce) */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes stepSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeIn 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-step-transition {
+  animation: stepSlideIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes spin {
@@ -361,11 +465,38 @@ input[type="range"].studio-slider::-webkit-slider-thumb:hover {
   .side-by-side-grid {
     grid-template-columns: 1fr !important;
   }
+
+  /* Unstick the budget ledger column on tablets/phones so it scrolls naturally */
+  .budget-planner-grid > div:first-child {
+    position: static !important;
+  }
 }
 
 @media (max-width: 640px) {
   .hide-mobile {
     display: none !important;
+  }
+
+  /* Protocol card in hero stacks gracefully on mobile */
+  .hero-protocol-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+  .hero-protocol-grid > div {
+    border-right: none !important;
+    border-bottom: 1px solid var(--color-ivory-300) !important;
+    padding-right: 0 !important;
+    padding-bottom: 12px !important;
+  }
+  .hero-protocol-grid > div:last-child {
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* Compact section paddings for mobile viewports */
+  section {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
   }
 }
 
@@ -387,3 +518,27 @@ input[type="range"].studio-slider::-webkit-slider-thumb:hover {
     padding: 0 !important;
   }
 }
+
+/* ==========================================================================
+   Reduced Motion Preferences (Respect user accessibility and motion settings)
+   Strictly disables decorative movement while preserving instant state changes
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-fade-in,
+  .animate-step-transition,
+  .card-interactive {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}
+

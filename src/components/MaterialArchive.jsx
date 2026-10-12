@@ -116,7 +116,7 @@ export default function MaterialArchive() {
             <div
               style={{
                 position: "relative",
-                height: "440px",
+                height: "clamp(280px, 45vw, 440px)",
                 overflow: "hidden",
                 backgroundColor: "var(--color-ivory-200)"
               }}

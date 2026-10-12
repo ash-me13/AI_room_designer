@@ -155,6 +155,48 @@ export default function Footer({ onOpenExport }) {
           </div>
         </div>
 
+        {/* Product Credibility & Authenticity Pledge */}
+        <div
+          style={{
+            backgroundColor: "rgba(255, 255, 255, 0.04)",
+            border: "1px solid rgba(255, 255, 255, 0.1)",
+            borderRadius: "var(--radius-xs)",
+            padding: "16px 20px",
+            marginBottom: 32,
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: 16
+          }}
+        >
+          <div style={{ maxWidth: 680 }}>
+            <span
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 10,
+                textTransform: "uppercase",
+                letterSpacing: "0.08em",
+                color: "var(--color-sand)",
+                display: "block",
+                marginBottom: 4
+              }}
+            >
+              AUTHENTICITY &amp; CREDIBILITY PLEDGE
+            </span>
+            <p style={{ fontSize: 12, color: "var(--color-ivory-200)", lineHeight: 1.5, margin: 0 }}>
+              RoomRevive is an independent design tool built for everyday living. We never fabricate customer reviews, user counts, or awards. Sample rooms are clearly labeled illustrative demo models, and uploaded photos are analyzed directly on your actual space without stock image substitutions. All price estimates reflect verified 2026 market benchmarks.
+            </p>
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 11, fontFamily: "var(--font-mono)", color: "var(--color-sage-light)", flexWrap: "wrap" }}>
+            <span>✓ 0 FABRICATED METRICS</span>
+            <span>•</span>
+            <span>✓ 4 FREE ₹0 FIXES</span>
+            <span>•</span>
+            <span>✓ 100% ZERO DEPOSIT DAMAGE</span>
+          </div>
+        </div>
+
         {/* Bottom Bar */}
         <div
           style={{

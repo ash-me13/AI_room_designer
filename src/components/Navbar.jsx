@@ -71,7 +71,7 @@ export default function Navbar({ onOpenExport }) {
 
           <button
             onClick={() => scrollTo("steps-section")}
-            className="btn btn-ghost"
+            className="btn btn-ghost hide-mobile"
             style={{ fontSize: 13, padding: "8px 14px", display: "flex", alignItems: "center", gap: 6 }}
           >
             <ListChecks size={14} strokeWidth={1.8} />
@@ -80,7 +80,7 @@ export default function Navbar({ onOpenExport }) {
 
           <button
             onClick={() => scrollTo("materials-section")}
-            className="btn btn-ghost"
+            className="btn btn-ghost hide-mobile"
             style={{ fontSize: 13, padding: "8px 14px", display: "flex", alignItems: "center", gap: 6 }}
           >
             <Palette size={14} strokeWidth={1.8} />

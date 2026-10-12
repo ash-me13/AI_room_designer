@@ -176,7 +176,7 @@ export default function MakeoverSteps() {
           className="hero-grid"
         >
           {/* Left Column: Vertical Step Navigation Tabs */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }} role="tablist" aria-label="Makeover steps">
             {steps.map((st, idx) => {
               const isActive = activeStep === idx;
               const isDone = completedSteps.includes(idx);
@@ -184,26 +184,42 @@ export default function MakeoverSteps() {
               return (
                 <div
                   key={st.stepNumber}
+                  role="tab"
+                  tabIndex={0}
+                  aria-selected={isActive}
+                  aria-label={`Step ${st.stepNumber}: ${st.title}`}
                   onClick={() => setActiveStep(idx)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setActiveStep(idx);
+                    }
+                  }}
+                  className="card-interactive"
                   style={{
                     padding: "16px 18px",
                     borderRadius: "var(--radius-sm)",
                     backgroundColor: isActive ? "var(--color-ivory-100)" : "#FFFFFF",
                     border: isActive ? "1.5px solid var(--color-ink-900)" : "1px solid var(--color-ivory-300)",
+                    borderLeft: isActive ? "4px solid var(--color-terracotta)" : "1px solid var(--color-ivory-300)",
                     cursor: "pointer",
-                    transition: "all 0.15s ease",
+                    transition: "all 0.18s cubic-bezier(0.16, 1, 0.3, 1)",
                     display: "flex",
                     alignItems: "flex-start",
                     gap: 14
                   }}
                 >
                   {/* Step status circle */}
-                  <div
+                  <button
+                    type="button"
                     onClick={(e) => {
                       e.stopPropagation();
                       toggleStepCompleted(idx);
                     }}
                     style={{
+                      border: "none",
+                      padding: 0,
+                      cursor: "pointer",
                       width: 24,
                       height: 24,
                       borderRadius: "50%",
@@ -216,12 +232,14 @@ export default function MakeoverSteps() {
                       alignItems: "center",
                       justifyContent: "center",
                       flexShrink: 0,
-                      marginTop: 2
+                      marginTop: 2,
+                      transition: "background-color 0.15s ease, transform 0.12s ease"
                     }}
+                    aria-label={isDone ? `Mark Step ${st.stepNumber} incomplete` : `Mark Step ${st.stepNumber} completed`}
                     title={isDone ? "Mark incomplete" : "Mark completed"}
                   >
                     {isDone ? <Check size={14} /> : st.stepNumber}
-                  </div>
+                  </button>
 
                   <div style={{ flex: 1 }}>
                     <h4
@@ -251,8 +269,10 @@ export default function MakeoverSteps() {
             })}
           </div>
 
-          {/* Right Column: Step Detail Card & Interactive Actions */}
+          {/* Right Column: Step Detail Card & Interactive Actions with Tasteful Step Transition */}
           <div
+            key={activeStep}
+            className="animate-step-transition"
             style={{
               backgroundColor: "var(--color-ivory-50)",
               border: "1px solid var(--color-ivory-300)",
@@ -391,13 +411,25 @@ export default function MakeoverSteps() {
                   </button>
                 )}
 
-                {activeStep < steps.length - 1 && (
+                {activeStep < steps.length - 1 ? (
                   <button
                     onClick={() => setActiveStep((prev) => prev + 1)}
                     className="btn btn-secondary"
                     style={{ fontSize: 13, gap: 6 }}
                   >
                     <span>Next: Step 0{activeStep + 2}</span>
+                    <ArrowRight size={14} />
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => {
+                      const el = document.getElementById("budget-section");
+                      if (el) el.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    className="btn btn-terracotta"
+                    style={{ fontSize: 13, gap: 6 }}
+                  >
+                    <span>Plan Your Budget Next</span>
                     <ArrowRight size={14} />
                   </button>
                 )}
